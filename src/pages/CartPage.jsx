@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import TrustBar from '../components/TrustBar';
+import OrderSummary from '../components/ui/OrderSummary';
 
 export default function CartPage() {
   const { items, total, updateQty, removeItem } = useCart();
@@ -102,44 +103,18 @@ export default function CartPage() {
 
         {/* Summary */}
         <div className="lg:col-span-1">
-          <div className="card card-pad sticky top-20" style={{ boxShadow: 'var(--shadow-md)' }}>
-            <h3 className="font-bold mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--deep)' }}>
-              Summary
-            </h3>
-            <div className="space-y-2 mb-4">
-              {items.map(item => (
-                <div key={item.cartKey} className="flex justify-between text-sm" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}>
-                  <span className="flex-1 pr-2 truncate">{item.name} × {item.qty}</span>
-                  <span>₹{(item.price * item.qty).toLocaleString()}</span>
-                </div>
-              ))}
-            </div>
-            <div
-              className="flex justify-between font-extrabold text-lg py-3 my-2"
-              style={{
-                borderTop: '1.5px solid var(--border)',
-                borderBottom: '1.5px solid var(--border)',
-                fontFamily: 'var(--font-display)',
-                color: 'var(--deep)',
-              }}
-            >
-              <span>Total</span>
-              <span style={{ color: 'var(--accent)' }}>₹{total.toLocaleString()}</span>
-            </div>
-            <p className="text-xs mb-4" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}>
-              Final price confirmed before work begins. Pay on-site after service.
-            </p>
+          <OrderSummary
+            items={items}
+            total={total}
+            note="Final price confirmed before work begins. Pay on-site after service."
+          >
             <button onClick={() => navigate('/booking')} className="btn btn-primary btn-lg btn-block">
               Book now <ArrowRight size={16} />
             </button>
-            <Link
-              to="/"
-              className="block text-center text-sm font-semibold mt-3"
-              style={{ color: 'var(--accent)', fontFamily: 'var(--font-display)' }}
-            >
+            <Link to="/" className="block text-center text-sm mt-3 link-accent">
               + Add more services
             </Link>
-          </div>
+          </OrderSummary>
         </div>
       </div>
 

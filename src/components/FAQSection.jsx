@@ -1,16 +1,12 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import SectionHeader from './ui/SectionHeader';
 
 export default function FAQSection({ faqs, title = 'Common Questions' }) {
   const [open, setOpen] = useState(null);
   return (
     <div className="my-8">
-      <div className="flex items-center gap-3 mb-4">
-        <h2 className="font-bold text-xl whitespace-nowrap" style={{ fontFamily: 'var(--font-display)', color: 'var(--deep)' }}>
-          {title}
-        </h2>
-        <div className="h-px flex-1" style={{ background: 'var(--border)' }} />
-      </div>
+      <SectionHeader title={title} />
       <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid var(--border)' }}>
         {faqs.map((faq, i) => (
           <div key={i} style={{ borderBottom: i < faqs.length - 1 ? '1px solid var(--border)' : 'none' }}>

@@ -7,7 +7,9 @@ import TrustBar from '../components/TrustBar';
 import FAQSection from '../components/FAQSection';
 import StarRating from '../components/StarRating';
 import SmartImage from '../components/SmartImage';
-import { ChevronRight, PackageOpen } from 'lucide-react';
+import CategoryNav from '../components/CategoryNav';
+import Breadcrumb from '../components/ui/Breadcrumb';
+import { PackageOpen } from 'lucide-react';
 
 const CAT_FALLBACK = {
   'sofa-carpet': 'fabric-sofa',
@@ -23,6 +25,10 @@ export default function CategoryPage() {
   const tabs = [...new Set(categoryServices.map(s => s.tab))];
   const [activeTab, setActiveTab] = useState(tabs[0] || '');
 
+  // When switching categories the component instance is reused, so `activeTab`
+  // can hold a tab from the previous category. Fall back to the first valid tab.
+  const currentTab = tabs.includes(activeTab) ? activeTab : (tabs[0] || '');
+
   if (!category) {
     return (
       <div className="page-body container py-20 text-center">
@@ -32,7 +38,7 @@ export default function CategoryPage() {
     );
   }
 
-  const filteredServices = categoryServices.filter(s => s.tab === activeTab);
+  const filteredServices = categoryServices.filter(s => s.tab === currentTab);
 
   return (
     <div className="page-body">
@@ -53,11 +59,11 @@ export default function CategoryPage() {
 
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="container pb-7 md:pb-9">
-            <div className="flex items-center gap-1.5 text-xs mb-3" style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'var(--font-body)' }}>
-              <Link to="/" className="hover:text-white transition-colors">Home</Link>
-              <ChevronRight size={12} />
-              <span style={{ color: 'rgba(255,255,255,0.92)' }}>{category.name}</span>
-            </div>
+            <Breadcrumb
+              tone="light"
+              className="mb-3"
+              items={[{ label: 'Home', to: '/' }, { label: category.name }]}
+            />
 
             <div className="flex items-end gap-4">
               <span className="text-5xl leading-none">{category.emoji}</span>
@@ -82,37 +88,44 @@ export default function CategoryPage() {
       </div>
 
       <div className="container">
-        {/* ── Tab row ───────────────────────────────────────── */}
+        {/* ── Category switcher (top-level) ─────────────────── */}
+        <CategoryNav activeSlug={slug} />
+
+        {/* ── Sub-tabs (underline style — distinct from pills) ─ */}
         {tabs.length > 1 && (
-          <div className="flex gap-2 overflow-x-auto no-scrollbar py-4 -mx-4 px-4 md:mx-0 md:px-0" role="tablist">
-            {tabs.map(tab => {
-              const active = activeTab === tab;
-              return (
-                <button
-                  key={tab}
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setActiveTab(tab)}
-                  className="shrink-0 px-4 rounded-full text-sm font-semibold transition-all whitespace-nowrap"
-                  style={{
-                    minHeight: 40,
-                    background: active ? 'var(--accent)' : 'white',
-                    color: active ? 'white' : 'var(--text-muted)',
-                    border: active ? 'none' : '1.5px solid var(--border-strong)',
-                    fontFamily: 'var(--font-display)',
-                    boxShadow: active ? 'var(--shadow-accent)' : 'none',
-                  }}
-                >
-                  {tab}
-                </button>
-              );
-            })}
+          <div
+            className="-mx-4 px-4 md:mx-0 md:px-0 mb-5"
+            style={{ borderBottom: '1.5px solid var(--border)' }}
+            role="tablist"
+            aria-label="Service types"
+          >
+            <div className="flex gap-1 overflow-x-auto no-scrollbar">
+              {tabs.map(tab => {
+                const active = currentTab === tab;
+                return (
+                  <button
+                    key={tab}
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setActiveTab(tab)}
+                    className="shrink-0 px-3 text-sm font-semibold whitespace-nowrap transition-colors relative font-display"
+                    style={{ minHeight: 46, color: active ? 'var(--accent)' : 'var(--text-muted)' }}
+                  >
+                    {tab}
+                    <span
+                      aria-hidden="true"
+                      style={{ position: 'absolute', left: 12, right: 12, bottom: -1.5, height: 3, borderRadius: 3, background: active ? 'var(--accent)' : 'transparent' }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
 
         {/* ── Service grid ──────────────────────────────────── */}
         {filteredServices.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2 mb-8 fade-in">
+          <div key={currentTab} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2 mb-8 fade-in">
             {filteredServices.map(service => (
               <ServiceCard key={service.id} service={service} />
             ))}

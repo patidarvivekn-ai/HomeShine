@@ -219,6 +219,20 @@ textarea.field { resize: none; line-height: 1.5; }
 .section-head .rule { flex: 1; height: 1px; background: var(--border); }
 
 /* ══════════════════════════════════════════════════════════
+   TYPOGRAPHY / COLOR HELPERS  (cut repeated inline styles)
+   ══════════════════════════════════════════════════════════ */
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+.c-deep   { color: var(--deep); }
+.c-text   { color: var(--text); }
+.c-muted  { color: var(--text-muted); }
+.c-faint  { color: var(--text-faint); }
+.c-accent { color: var(--accent); }
+.c-gold   { color: var(--gold); }
+.link-accent { color: var(--accent); font-family: var(--font-display); font-weight: 600; transition: color .15s ease; }
+@media (hover:hover) { .link-accent:hover { color: var(--accent-hover); } }
+
+/* ══════════════════════════════════════════════════════════
    IMAGE / SKELETON / ANIMATION
    ══════════════════════════════════════════════════════════ */
 .img-wrap { position: relative; overflow: hidden; background: var(--surface-2); }

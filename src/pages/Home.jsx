@@ -6,7 +6,8 @@ import HowItWorks from '../components/HowItWorks';
 import FAQSection from '../components/FAQSection';
 import StarRating from '../components/StarRating';
 import SmartImage from '../components/SmartImage';
-import { ArrowRight, Star, Shield, Leaf, Clock } from 'lucide-react';
+import SectionHeader from '../components/ui/SectionHeader';
+import { ArrowRight, Star, Shield, Leaf, Clock, Phone } from 'lucide-react';
 
 const PILLS = [
   { icon: <Leaf size={13} />,   text: 'Eco-safe products' },
@@ -74,8 +75,8 @@ export default function Home() {
                 <Link to="/services/sofa-carpet" className="btn btn-primary btn-lg">
                   Explore services <ArrowRight size={16} />
                 </Link>
-                <a href="tel:+911234567890" className="btn btn-dark btn-lg">
-                  <Phone /> 1234-567-890
+                <a href="tel:+8000384003" className="btn btn-dark btn-lg">
+                  <Phone size={16} /> 8000384003
                 </a>
               </div>
             </div>
@@ -112,13 +113,14 @@ export default function Home() {
 
       {/* ── SERVICES GRID ──────────────────────────────────── */}
       <section className="container pt-10 pb-2">
-        <div className="section-head">
-          <h2>Our services</h2>
-          <div className="rule" />
-          <Link to="/services/sofa-carpet" className="shrink-0 text-xs font-bold flex items-center gap-1" style={{ color: 'var(--accent)', fontFamily: 'var(--font-display)' }}>
-            View all <ArrowRight size={12} />
-          </Link>
-        </div>
+        <SectionHeader
+          title="Our services"
+          action={
+            <Link to="/services/sofa-carpet" className="shrink-0 text-xs font-bold flex items-center gap-1 link-accent">
+              View all <ArrowRight size={12} />
+            </Link>
+          }
+        />
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           {categories.map((cat) => (
@@ -162,8 +164,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
-
-function Phone() {
-  return <span style={{ fontSize: 15 }}>📞</span>;
 }

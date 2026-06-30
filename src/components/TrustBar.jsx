@@ -1,3 +1,4 @@
+import { Phone } from 'lucide-react';
 import { globalContent } from '../data/services';
 
 export default function TrustBar() {
@@ -72,16 +73,8 @@ export default function TrustBar() {
           >
             All services include free re-clean within 30 days if you're not satisfied.
           </p>
-          <a
-            href="tel:+911234567890"
-            className="shrink-0 font-bold text-sm px-4 py-2 rounded-xl transition-colors"
-            style={{
-              background: 'var(--accent)',
-              color: 'white',
-              fontFamily: 'var(--font-display)',
-            }}
-          >
-            📞 Call now
+          <a href="tel:+8000384003" className="btn btn-primary shrink-0">
+            <Phone size={15} /> Call now
           </a>
         </div>
       </div>

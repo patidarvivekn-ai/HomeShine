@@ -43,7 +43,7 @@ export default function BottomNav() {
           );
         })}
         <a
-          href="tel:+911234567890"
+          href="tel:8000384003"
           className="flex-1 flex flex-col items-center justify-center gap-1 transition-colors"
           style={{ color: 'var(--text-muted)', minHeight: 60 }}
         >

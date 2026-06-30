@@ -1,32 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { commercialServices, commercialBenefits, commercialFaqs } from '../data/services';
 import TrustBar from '../components/TrustBar';
 import FAQSection from '../components/FAQSection';
-import { ChevronRight, CheckCircle } from 'lucide-react';
+import Breadcrumb from '../components/ui/Breadcrumb';
+import CategoryNav from '../components/CategoryNav';
+import { TextField, SelectField, TextAreaField } from '../components/ui/Field';
+import { CheckCircle } from 'lucide-react';
 
 const PROPERTY_TYPES = ['Office', 'Retail', 'Clinic', 'Restaurant', 'Educational institute', 'Other'];
 const FREQUENCIES = ['One-time', 'Weekly', 'Monthly'];
-
-// Defined at module scope (NOT inside the component) so inputs keep focus
-// while typing — a nested component definition would remount on every keystroke.
-function Field({ label, name, value, onChange, error, type = 'text', placeholder, required }) {
-  return (
-    <div>
-      <label className="field-label">
-        {label} {required && <span style={{ color: '#dc2626' }}>*</span>}
-      </label>
-      <input
-        type={type}
-        value={value}
-        onChange={e => onChange(name, e.target.value)}
-        placeholder={placeholder}
-        className={`field ${error ? 'is-error' : ''}`}
-      />
-      {error && <p className="field-error">{error}</p>}
-    </div>
-  );
-}
 
 export default function CommercialPage() {
   const [form, setForm] = useState({
@@ -56,12 +38,8 @@ export default function CommercialPage() {
 
   return (
     <div className="page-body container py-8">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-1.5 text-xs mb-6" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}>
-        <Link to="/" className="hover:text-emerald-700 transition-colors">Home</Link>
-        <ChevronRight size={12} />
-        <span style={{ color: 'var(--deep)', fontWeight: 600 }}>Commercial Cleaning</span>
-      </div>
+      <Breadcrumb items={[{ label: 'Home', to: '/' }, { label: 'Commercial Cleaning' }]} />
+      <CategoryNav activeSlug="commercial" />
 
       {/* Header */}
       <div
@@ -121,89 +99,47 @@ export default function CommercialPage() {
         {/* Quote form */}
         <div>
           <div className="card card-pad" style={{ boxShadow: 'var(--shadow-md)' }}>
-            <h2 className="font-extrabold text-xl mb-1" style={{ fontFamily: 'var(--font-display)', color: 'var(--deep)' }}>Get a custom quote</h2>
-            <p className="text-sm mb-5" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}>Our business team will call you within 24 hours.</p>
+            <h2 className="font-extrabold text-xl mb-1 font-display c-deep">Get a custom quote</h2>
+            <p className="text-sm mb-5 c-muted font-body">Our business team will call you within 24 hours.</p>
 
             {submitted ? (
               <div className="text-center py-12">
                 <div className="text-5xl mb-4">🎉</div>
-                <h3 className="font-extrabold text-xl mb-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--deep)' }}>Thanks, {form.name}!</h3>
-                <p className="text-sm" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}>
+                <h3 className="font-extrabold text-xl mb-2 font-display c-deep">Thanks, {form.name}!</h3>
+                <p className="text-sm c-muted font-body">
                   Our business team will call you within 24 hours with a custom quote.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Field label="Your name" name="name" value={form.name} onChange={setField} error={errors.name} placeholder="Rahul Sharma" required />
-                  <Field label="Company" name="company" value={form.company} onChange={setField} placeholder="Acme Pvt. Ltd." />
+                  <TextField label="Your name" name="name" value={form.name} onChange={v => setField('name', v)} error={errors.name} placeholder="Rahul Sharma" required />
+                  <TextField label="Company" name="company" value={form.company} onChange={v => setField('company', v)} placeholder="Acme Pvt. Ltd." />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Field label="Phone" name="phone" type="tel" value={form.phone} onChange={setField} error={errors.phone} placeholder="9876543210" required />
-                  <Field label="Email" name="email" type="email" value={form.email} onChange={setField} error={errors.email} placeholder="you@company.com" required />
+                  <TextField label="Phone" name="phone" type="tel" inputMode="numeric" value={form.phone} onChange={v => setField('phone', v)} error={errors.phone} placeholder="9876543210" required />
+                  <TextField label="Email" name="email" type="email" value={form.email} onChange={v => setField('email', v)} error={errors.email} placeholder="you@company.com" required />
                 </div>
-                <Field label="City" name="city" value={form.city} onChange={setField} placeholder="Mumbai, Pune, Hyderabad…" />
+                <TextField label="City" name="city" value={form.city} onChange={v => setField('city', v)} placeholder="Mumbai, Pune, Hyderabad…" />
 
-                <div>
-                  <label className="field-label">
-                    Property type <span style={{ color: '#dc2626' }}>*</span>
-                  </label>
-                  <select
-                    value={form.propertyType}
-                    onChange={e => setField('propertyType', e.target.value)}
-                    className={`field ${errors.propertyType ? 'is-error' : ''}`}
-                  >
-                    <option value="">Select…</option>
-                    {PROPERTY_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
-                  </select>
-                  {errors.propertyType && <p className="field-error">{errors.propertyType}</p>}
-                </div>
+                <SelectField
+                  label="Property type"
+                  name="propertyType"
+                  value={form.propertyType}
+                  onChange={v => setField('propertyType', v)}
+                  error={errors.propertyType}
+                  options={PROPERTY_TYPES}
+                  required
+                />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="field-label">Approx. area (sq ft)</label>
-                    <input
-                      type="number"
-                      value={form.area}
-                      onChange={e => setField('area', e.target.value)}
-                      placeholder="2000"
-                      className="field"
-                    />
-                  </div>
-                  <div>
-                    <label className="field-label">Frequency</label>
-                    <select
-                      value={form.frequency}
-                      onChange={e => setField('frequency', e.target.value)}
-                      className="field"
-                    >
-                      <option value="">Select…</option>
-                      {FREQUENCIES.map(f => <option key={f} value={f}>{f}</option>)}
-                    </select>
-                  </div>
+                  <TextField label="Approx. area (sq ft)" name="area" type="number" inputMode="numeric" value={form.area} onChange={v => setField('area', v)} placeholder="2000" />
+                  <SelectField label="Frequency" name="frequency" value={form.frequency} onChange={v => setField('frequency', v)} options={FREQUENCIES} />
                 </div>
 
-                <div>
-                  <label className="field-label">Preferred timing</label>
-                  <input
-                    type="text"
-                    value={form.timing}
-                    onChange={e => setField('timing', e.target.value)}
-                    placeholder="E.g. weekday evenings after 7 PM"
-                    className="field"
-                  />
-                </div>
+                <TextField label="Preferred timing" name="timing" value={form.timing} onChange={v => setField('timing', v)} placeholder="E.g. weekday evenings after 7 PM" />
 
-                <div>
-                  <label className="field-label">Additional notes</label>
-                  <textarea
-                    value={form.message}
-                    onChange={e => setField('message', e.target.value)}
-                    rows={3}
-                    placeholder="Anything specific we should know…"
-                    className="field"
-                  />
-                </div>
+                <TextAreaField label="Additional notes" name="message" value={form.message} onChange={v => setField('message', v)} rows={3} placeholder="Anything specific we should know…" />
 
                 <button
                   type="submit"

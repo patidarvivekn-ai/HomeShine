@@ -1,28 +1,12 @@
 import { globalContent } from '../data/services';
-
-const CONNECTOR = (
-  <div
-    className="hidden md:flex items-center justify-center"
-    style={{ color: 'var(--border)', fontSize: 22 }}
-  >
-    →
-  </div>
-);
+import SectionHeader from './ui/SectionHeader';
 
 export default function HowItWorks() {
   const steps = globalContent.howItWorks;
 
   return (
     <section className="my-10">
-      <div className="flex items-center gap-3 mb-6">
-        <h2
-          className="font-extrabold text-xl whitespace-nowrap"
-          style={{ fontFamily: 'var(--font-display)', color: 'var(--deep)' }}
-        >
-          How it works
-        </h2>
-        <div className="h-px flex-1" style={{ background: 'var(--border)' }} />
-      </div>
+      <SectionHeader title="How it works" />
 
       {/* Mobile: horizontal scroll  |  Desktop: 4-col with connectors */}
       <div className="flex gap-3 overflow-x-auto no-scrollbar md:grid md:overflow-visible"
