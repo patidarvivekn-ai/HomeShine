@@ -75,8 +75,8 @@ export default function Home() {
                 <Link to="/services/sofa-carpet" className="btn btn-primary btn-lg">
                   Explore services <ArrowRight size={16} />
                 </Link>
-                <a href="tel:+8000384003" className="btn btn-dark btn-lg">
-                  <Phone size={16} /> 8000384003
+                <a href="tel:+8000384002" className="btn btn-dark btn-lg">
+                  <Phone size={16} /> 8000384002
                 </a>
               </div>
             </div>

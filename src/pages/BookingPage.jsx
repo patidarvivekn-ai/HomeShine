@@ -120,7 +120,7 @@ export default function BookingPage() {
         <p className="mb-1 c-muted font-body">📅 {selectedDate && formatDay(selectedDate)} · ⏰ {selectedSlot}</p>
         <p className="mb-6 c-muted font-body">📍 {address.line1}, {address.city} — {address.pincode}</p>
         <p className="text-sm mb-8 c-muted font-body">
-          Our professional will call you 30 minutes before arriving. Questions? Call 8000384003.
+          Our professional will call you 30 minutes before arriving. Questions? Call 8000384002.
         </p>
         <Link to="/" className="btn btn-primary btn-lg">Back to home</Link>
       </div>

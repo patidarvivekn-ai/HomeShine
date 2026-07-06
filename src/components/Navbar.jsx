@@ -55,8 +55,8 @@ export default function Navbar() {
 
         {/* Right actions */}
         <div className="flex items-center gap-2 shrink-0">
-          <a href="tel:+8000384003" className="hidden md:inline-flex btn btn-sm" style={{ background: 'var(--accent-light)', color: 'var(--accent-press)' }}>
-            <Phone size={14} /> 8000384003
+          <a href="tel:+8000384002" className="hidden md:inline-flex btn btn-sm" style={{ background: 'var(--accent-light)', color: 'var(--accent-press)' }}>
+            <Phone size={14} /> 8000384002
           </a>
           <button
             onClick={() => navigate('/cart')}

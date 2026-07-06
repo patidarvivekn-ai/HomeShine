@@ -24,7 +24,7 @@ export default function Footer() {
           </div>
           <div className="flex gap-2.5 shrink-0">
             <Link to="/services/sofa-carpet" className="btn btn-primary">Book now <ArrowRight size={15} /></Link>
-            <a href="tel:+8000384003" className="btn btn-dark"><Phone size={15} /> Call</a>
+            <a href="tel:+8000384002" className="btn btn-dark"><Phone size={15} /> Call</a>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-bold mb-3.5 uppercase tracking-wider font-display c-gold">Contact</h4>
             <ul className="space-y-3 text-sm font-body" style={{ color: 'rgba(255,255,255,0.55)' }}>
-              <li><a href="tel:+8000384003" className="flex items-center gap-2 hover:text-white transition-colors"><Phone size={14} className="shrink-0" /> 8000384003</a></li>
+              <li><a href="tel:+8000384002" className="flex items-center gap-2 hover:text-white transition-colors"><Phone size={14} className="shrink-0" /> 8000384002</a></li>
               <li><a href="mailto:hello@homeshine.in" className="flex items-center gap-2 hover:text-white transition-colors"><Mail size={14} className="shrink-0" /> hello@homeshine.in</a></li>
               <li className="flex items-center gap-2"><Clock size={14} className="shrink-0" /> Mon–Sun, 7 AM – 8 PM</li>
             </ul>

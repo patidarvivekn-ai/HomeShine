@@ -73,7 +73,7 @@ export default function TrustBar() {
           >
             All services include free re-clean within 30 days if you're not satisfied.
           </p>
-          <a href="tel:+8000384003" className="btn btn-primary shrink-0">
+          <a href="tel:+8000384002" className="btn btn-primary shrink-0">
             <Phone size={15} /> Call now
           </a>
         </div>

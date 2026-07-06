@@ -43,7 +43,7 @@ export default function BottomNav() {
           );
         })}
         <a
-          href="tel:8000384003"
+          href="tel:8000384002"
           className="flex-1 flex flex-col items-center justify-center gap-1 transition-colors"
           style={{ color: 'var(--text-muted)', minHeight: 60 }}
         >
