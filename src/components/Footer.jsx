@@ -1,5 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, Clock, ArrowRight } from 'lucide-react';
+import {
+  Phone,
+  Mail,
+  Clock,
+  ArrowRight,
+  BadgeCheck,
+  Leaf,
+  Sparkles,
+  Shield,
+  Calendar,
+} from 'lucide-react';
 import { globalContent } from '../data/services';
 
 const SERVICE_LINKS = [
@@ -9,68 +19,87 @@ const SERVICE_LINKS = [
   ['Commercial', '/services/commercial'],
 ];
 
+const PROMISE_ICONS = [BadgeCheck, Leaf, Sparkles, Shield, Calendar];
+
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--deep)' }} className="mt-10">
-      <div className="container py-10" style={{ paddingBottom: 'calc(96px + env(safe-area-inset-bottom))' }}>
-        {/* CTA band */}
-        <div
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl p-5 md:p-6 mb-9"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.09)' }}
-        >
+    <footer className="site-footer">
+      <div className="container site-footer__inner">
+        <div className="site-footer__cta">
           <div>
-            <p className="font-extrabold text-lg font-display" style={{ color: 'white' }}>Ready for a spotless space?</p>
-            <p className="text-sm mt-0.5 font-body" style={{ color: 'rgba(255,255,255,0.55)' }}>Book in under 2 minutes — pay after the service.</p>
+            <p className="site-footer__cta-title">Ready for a spotless space?</p>
+            <p className="site-footer__cta-sub">
+              Book in under 2 minutes — pay after the service.
+            </p>
           </div>
-          <div className="flex gap-2.5 shrink-0">
-            <Link to="/services/sofa-carpet" className="btn btn-primary">Book now <ArrowRight size={15} /></Link>
-            <a href="tel:+8000384002" className="btn btn-dark"><Phone size={15} /> Call</a>
+          <div className="site-footer__cta-actions">
+            <Link to="/services/sofa-carpet" className="btn btn-primary">
+              Book now <ArrowRight size={15} />
+            </Link>
+            <a href="tel:+8000384002" className="btn btn-dark">
+              <Phone size={15} /> Call
+            </a>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-          <div className="col-span-2 md:col-span-1">
-            <div className="font-extrabold text-lg mb-3 flex items-center gap-2 font-display" style={{ color: 'white' }}>
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold" style={{ background: 'var(--accent)', color: 'white' }}>H</div>
+        <div className="site-footer__grid">
+          <div>
+            <div className="site-footer__brand">
+              <div className="site-footer__logo" aria-hidden="true">H</div>
               Home Shine
             </div>
-            <p className="text-sm leading-relaxed font-body" style={{ color: 'rgba(255,255,255,0.5)' }}>
+            <p className="site-footer__tagline">
               Professional deep cleaning for homes and businesses. Verified, trained, trusted.
             </p>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold mb-3.5 uppercase tracking-wider font-display c-gold">Services</h4>
-            <ul className="space-y-2.5 text-sm font-body" style={{ color: 'rgba(255,255,255,0.55)' }}>
+            <h4 className="site-footer__heading">Services</h4>
+            <ul className="site-footer__links">
               {SERVICE_LINKS.map(([label, path]) => (
-                <li key={path}><Link to={path} className="hover:text-white transition-colors">{label}</Link></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-xs font-bold mb-3.5 uppercase tracking-wider font-display c-gold">Our Promise</h4>
-            <ul className="space-y-2.5">
-              {globalContent.promise.map((p, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm font-body" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                  <span className="shrink-0">{p.icon}</span>
-                  <span>{p.text}</span>
+                <li key={path}>
+                  <Link to={path}>{label}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold mb-3.5 uppercase tracking-wider font-display c-gold">Contact</h4>
-            <ul className="space-y-3 text-sm font-body" style={{ color: 'rgba(255,255,255,0.55)' }}>
-              <li><a href="tel:+8000384002" className="flex items-center gap-2 hover:text-white transition-colors"><Phone size={14} className="shrink-0" /> 8000384002</a></li>
-              <li><a href="mailto:hello@homeshine.in" className="flex items-center gap-2 hover:text-white transition-colors"><Mail size={14} className="shrink-0" /> hello@homeshine.in</a></li>
-              <li className="flex items-center gap-2"><Clock size={14} className="shrink-0" /> Mon–Sun, 7 AM – 8 PM</li>
+            <h4 className="site-footer__heading">Our Promise</h4>
+            <ul className="site-footer__links">
+              {globalContent.promise.map((p, i) => {
+                const Icon = PROMISE_ICONS[i];
+                return (
+                  <li key={p.text} className="site-footer__promise-item">
+                    <Icon size={14} aria-hidden="true" />
+                    <span>{p.text}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="site-footer__heading">Contact</h4>
+            <ul className="site-footer__links">
+              <li>
+                <a href="tel:+8000384002" className="site-footer__contact-item">
+                  <Phone size={14} /> 8000384002
+                </a>
+              </li>
+              <li>
+                <a href="mailto:hello@homeshine.in" className="site-footer__contact-item">
+                  <Mail size={14} /> hello@homeshine.in
+                </a>
+              </li>
+              <li className="site-footer__contact-item">
+                <Clock size={14} /> Mon–Sun, 7 AM – 8 PM
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-6 text-xs text-center font-body" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.32)' }}>
+        <div className="site-footer__legal">
           © {new Date().getFullYear()} Home Shine Deep Cleaning. All rights reserved.
         </div>
       </div>

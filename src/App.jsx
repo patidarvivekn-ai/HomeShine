@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import ScrollToTop from './components/ScrollToTop';
+import FloatingActions from './components/FloatingActions';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BottomNav from './components/BottomNav';
@@ -28,6 +29,7 @@ export default function App() {
           </main>
           <Footer />
           <BottomNav />
+          <FloatingActions />
         </div>
       </BrowserRouter>
     </CartProvider>
