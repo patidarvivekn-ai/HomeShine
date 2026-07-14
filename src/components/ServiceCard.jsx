@@ -35,7 +35,15 @@ export default function ServiceCard({ service }) {
           className="service-card__media-btn"
           aria-label={`View details for ${service.name}`}
         >
-          <SmartImage src={photo} alt={service.name} fallbackId={service.id} className="w-full h-full">
+          <SmartImage
+            src={photo}
+            alt={service.name}
+            fallbackId={service.id}
+            photoKey={service.id}
+            variant="card"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+            className="w-full h-full img-wrap--zoom"
+          >
             <div className="service-card__overlay" />
             <div className="service-card__price-row">
               <span className="service-card__price">
@@ -75,7 +83,7 @@ export default function ServiceCard({ service }) {
             <button
               type="button"
               onClick={handleQuickAdd}
-              className={`btn btn-sm flex-1 ${added ? 'btn-secondary' : 'btn-primary'}`}
+              className={`btn btn-sm flex-1 ${added ? 'btn-secondary is-added' : 'btn-primary'}`}
             >
               {added ? <><Check size={15} /> Added</> : <><Plus size={15} /> Add</>}
             </button>

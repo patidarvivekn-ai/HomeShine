@@ -3,6 +3,7 @@ import {
   Phone,
   Mail,
   Clock,
+  MapPin,
   ArrowRight,
   BadgeCheck,
   Leaf,
@@ -20,6 +21,9 @@ const SERVICE_LINKS = [
 ];
 
 const PROMISE_ICONS = [BadgeCheck, Leaf, Sparkles, Shield, Calendar];
+
+const OFFICE_ADDRESS = 'ASOPALAV RESIDENCY, 107 / 01, Thaltej, Ahmedabad, Gujarat 380059';
+const OFFICE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(OFFICE_ADDRESS)}`;
 
 export default function Footer() {
   return (
@@ -88,8 +92,19 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@homeshine.in" className="site-footer__contact-item">
-                  <Mail size={14} /> hello@homeshine.in
+                <a href="mailto:homeshine2026@gmail.com" className="site-footer__contact-item">
+                  <Mail size={14} /> homeshine2026@gmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href={OFFICE_MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="site-footer__contact-item site-footer__contact-item--address"
+                >
+                  <MapPin size={14} />
+                  <span>{OFFICE_ADDRESS}</span>
                 </a>
               </li>
               <li className="site-footer__contact-item">

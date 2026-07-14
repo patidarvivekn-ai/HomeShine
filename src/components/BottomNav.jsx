@@ -13,42 +13,32 @@ export default function BottomNav() {
   const { count } = useCart();
 
   return (
-    <nav
-      className="fixed bottom-0 left-0 right-0 z-40 bg-white md:hidden"
-      style={{ borderTop: '1px solid var(--border)', paddingBottom: 'env(safe-area-inset-bottom)', boxShadow: '0 -2px 16px rgba(7,20,12,0.06)' }}
-    >
-      <div className="flex items-stretch">
+    <nav className="bottom-nav md:hidden" aria-label="Mobile navigation">
+      <div className="bottom-nav__inner">
         {tabs.map(({ to, Icon, label, match }) => {
           const active = match(pathname);
           return (
             <Link
               key={to}
               to={to}
-              className="flex-1 flex flex-col items-center justify-center gap-1 transition-colors"
-              style={{ color: active ? 'var(--accent)' : 'var(--text-muted)', minHeight: 60 }}
+              className={`bottom-nav__item ${active ? 'is-active' : ''}`}
+              aria-current={active ? 'page' : undefined}
             >
-              <div className="relative">
-                <Icon size={23} strokeWidth={active ? 2.3 : 1.8} />
+              <span className="bottom-nav__icon-wrap">
+                <Icon size={22} strokeWidth={active ? 2.4 : 1.8} aria-hidden="true" />
                 {label === 'Cart' && count > 0 && (
-                  <span
-                    className="absolute -top-1.5 -right-2 text-white text-[10px] font-bold min-w-[16px] h-4 px-1 rounded-full flex items-center justify-center"
-                    style={{ background: 'var(--gold)', fontFamily: 'var(--font-display)' }}
-                  >
-                    {count}
-                  </span>
+                  <span className="bottom-nav__badge">{count}</span>
                 )}
-              </div>
-              <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-display)' }}>{label}</span>
+              </span>
+              <span className="bottom-nav__label">{label}</span>
             </Link>
           );
         })}
-        <a
-          href="tel:8000384002"
-          className="flex-1 flex flex-col items-center justify-center gap-1 transition-colors"
-          style={{ color: 'var(--text-muted)', minHeight: 60 }}
-        >
-          <Phone size={23} strokeWidth={1.8} />
-          <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-display)' }}>Call Us</span>
+        <a href="tel:8000384002" className="bottom-nav__item">
+          <span className="bottom-nav__icon-wrap">
+            <Phone size={22} strokeWidth={1.8} aria-hidden="true" />
+          </span>
+          <span className="bottom-nav__label">Call Us</span>
         </a>
       </div>
     </nav>

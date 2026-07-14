@@ -98,12 +98,14 @@ export default function CommercialPage() {
           src={categoryImages.commercial}
           alt="Commercial office cleaning"
           fallbackId="commercial"
+          photoKey="commercial"
+          variant="banner"
+          sizes="100vw"
           eager
           className="commercial-hero__media"
-        >
-          <div className="commercial-hero__overlay" />
-          <div className="commercial-hero__glow" aria-hidden="true" />
-        </SmartImage>
+        />
+        <div className="commercial-hero__overlay" aria-hidden="true" />
+        <div className="commercial-hero__glow" aria-hidden="true" />
 
         <div className="commercial-hero__content">
           <div className="container commercial-hero__inner">

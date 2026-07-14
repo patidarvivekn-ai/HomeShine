@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { categories, globalContent } from '../data/services';
-import { categoryImages, heroCollage } from '../data/images';
+import { categoryImages, heroCollage, heroCollageIds } from '../data/images';
 import TrustBar from '../components/TrustBar';
 import HowItWorks from '../components/HowItWorks';
 import FAQSection from '../components/FAQSection';
@@ -73,7 +73,10 @@ export default function Home() {
                   key={HERO_FALLBACK[i]}
                   src={src}
                   fallbackId={HERO_FALLBACK[i]}
-                  className="rounded-2xl"
+                  photoKey={heroCollageIds[i]}
+                  variant="card"
+                  sizes="(max-width: 1023px) 45vw, 200px"
+                  className={`rounded-2xl img-wrap--zoom hero__collage-tile hero__collage-tile--${i + 1}`}
                   style={{ aspectRatio: '4/3' }}
                 />
               ))}
@@ -116,7 +119,10 @@ export default function Home() {
                 src={categoryImages[cat.slug]}
                 alt={cat.name}
                 fallbackId={CAT_FALLBACK[cat.slug]}
-                className="w-full h-full"
+                photoKey={cat.slug}
+                variant="banner"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 280px"
+                className="w-full h-full img-wrap--zoom"
               >
                 <div className="cat-card__overlay" />
                 <div className="cat-card__body">

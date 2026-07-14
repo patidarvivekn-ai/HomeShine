@@ -93,6 +93,9 @@ const ServiceDrawerPanel = ({ service, onClose }) => {
           src={photo}
           alt={service.name}
           fallbackId={service.id}
+          photoKey={service.id}
+          variant="card"
+          sizes="(max-width: 768px) 100vw, 440px"
           eager
           className="service-drawer__hero-img"
         >

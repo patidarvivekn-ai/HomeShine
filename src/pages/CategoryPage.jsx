@@ -42,17 +42,19 @@ export default function CategoryPage() {
 
   return (
     <div className="page-body">
-      {/* Category hero */}
+      {/* Category hero — overlay is a sibling so it always covers full banner */}
       <div className="category-hero">
         <SmartImage
           src={categoryImages[slug]}
           alt={category.name}
           fallbackId={CAT_FALLBACK[slug]}
+          photoKey={slug}
+          variant="banner"
+          sizes="100vw"
           eager
           className="category-hero__media"
-        >
-          <div className="category-hero__overlay" />
-        </SmartImage>
+        />
+        <div className="category-hero__overlay" aria-hidden="true" />
 
         <div className="category-hero__content">
           <div className="container category-hero__inner">
@@ -79,7 +81,7 @@ export default function CategoryPage() {
         {/* ── Sub-tabs (underline style — distinct from pills) ─ */}
         {tabs.length > 1 && (
           <div className="service-tabs" role="tablist" aria-label="Service types">
-            <div className="flex gap-2 overflow-x-auto no-scrollbar">
+            <div className="service-tabs__scroller no-scrollbar">
               {tabs.map(tab => {
                 const active = currentTab === tab;
                 return (

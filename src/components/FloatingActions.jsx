@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 
 const SCROLL_THRESHOLD = 320;
-const WHATSAPP_URL = `https://wa.me/918000384002?text=${encodeURIComponent('Hi, I need help with Home Shine cleaning services.')}`;
+const WHATSAPP_URL = buildWhatsAppUrl('Hi, I need help with Home Shine cleaning services.');
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
