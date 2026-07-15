@@ -9,12 +9,24 @@ import { serviceImages } from '../data/images';
 export default function ServiceCard({ service }) {
   const { addItem } = useCart();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerSection, setDrawerSection] = useState('details');
   const [added, setAdded] = useState(false);
 
   const photo = serviceImages[service.id] || serviceImages['fabric-sofa'];
+  const hasMultipleOptions = service.priceOptions.length > 1;
+
+  const openDrawer = (section = 'details') => {
+    setDrawerSection(section);
+    setDrawerOpen(true);
+  };
 
   const handleQuickAdd = (e) => {
     e.stopPropagation();
+    if (hasMultipleOptions) {
+      openDrawer('options');
+      return;
+    }
+
     addItem({
       cartKey: `${service.id}-${service.priceOptions[0].label}`,
       serviceId: service.id,
@@ -31,9 +43,9 @@ export default function ServiceCard({ service }) {
       <article className="service-card card">
         <button
           type="button"
-          onClick={() => setDrawerOpen(true)}
+          onClick={() => openDrawer('options')}
           className="service-card__media-btn"
-          aria-label={`View details for ${service.name}`}
+          aria-label={`Choose an option for ${service.name}`}
         >
           <SmartImage
             src={photo}
@@ -54,13 +66,18 @@ export default function ServiceCard({ service }) {
             <div className="service-card__duration">
               <Clock size={11} aria-hidden="true" /> {service.duration}
             </div>
+            {hasMultipleOptions && (
+              <span className="service-card__option-count">
+                {service.priceOptions.length} options
+              </span>
+            )}
           </SmartImage>
         </button>
 
         <div className="service-card__body">
           <button
             type="button"
-            onClick={() => setDrawerOpen(true)}
+            onClick={() => openDrawer('details')}
             className="service-card__header-btn"
           >
             <h3 className="service-card__title">{service.name}</h3>
@@ -77,7 +94,7 @@ export default function ServiceCard({ service }) {
           </ul>
 
           <div className="service-card__actions">
-            <button type="button" onClick={() => setDrawerOpen(true)} className="btn btn-secondary btn-sm flex-1">
+            <button type="button" onClick={() => openDrawer('details')} className="btn btn-secondary btn-sm flex-1">
               Details
             </button>
             <button
@@ -85,13 +102,20 @@ export default function ServiceCard({ service }) {
               onClick={handleQuickAdd}
               className={`btn btn-sm flex-1 ${added ? 'btn-secondary is-added' : 'btn-primary'}`}
             >
-              {added ? <><Check size={15} /> Added</> : <><Plus size={15} /> Add</>}
+              {added
+                ? <><Check size={15} /> Added</>
+                : <><Plus size={15} /> {hasMultipleOptions ? 'Select' : 'Add'}</>}
             </button>
           </div>
         </div>
       </article>
 
-      <ServiceDetailDrawer service={service} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <ServiceDetailDrawer
+        service={service}
+        open={drawerOpen}
+        initialSection={drawerSection}
+        onClose={() => setDrawerOpen(false)}
+      />
     </>
   );
 }

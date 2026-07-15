@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { categories, services, globalContent } from '../data/services';
 import { categoryImages } from '../data/images';
@@ -21,6 +21,7 @@ const CAT_FALLBACK = {
 
 export default function CategoryPage() {
   const { slug } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const category = categories.find(c => c.slug === slug);
   const categoryServices = services[slug] || [];
   const tabs = [...new Set(categoryServices.map(s => s.tab))];
@@ -28,7 +29,10 @@ export default function CategoryPage() {
 
   // When switching categories the component instance is reused, so `activeTab`
   // can hold a tab from the previous category. Fall back to the first valid tab.
-  const currentTab = tabs.includes(activeTab) ? activeTab : (tabs[0] || '');
+  const requestedTab = searchParams.get('tab');
+  const currentTab = tabs.includes(requestedTab)
+    ? requestedTab
+    : (tabs.includes(activeTab) ? activeTab : (tabs[0] || ''));
 
   if (!category) {
     return (
@@ -102,7 +106,10 @@ export default function CategoryPage() {
                     type="button"
                     role="tab"
                     aria-selected={active}
-                    onClick={() => setActiveTab(tab)}
+                    onClick={() => {
+                      setActiveTab(tab);
+                      setSearchParams({ tab }, { replace: true });
+                    }}
                     className={`service-tab ${active ? 'is-active' : ''}`}
                   >
                     {tab}

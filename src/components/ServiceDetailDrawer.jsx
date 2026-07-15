@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Clock, CheckCircle, XCircle, Plus, Minus, ChevronDown } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -39,14 +39,35 @@ const DrawerSectionLabel = ({ children }) => (
   <p className="service-drawer__label">{children}</p>
 );
 
-const ServiceDrawerPanel = ({ service, onClose }) => {
+const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
   const { addItem } = useCart();
   const [selectedOption, setSelectedOption] = useState(0);
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [addedFeedback, setAddedFeedback] = useState(false);
+  const scrollRef = useRef(null);
+  const optionsRef = useRef(null);
 
   const photo = serviceImages[service.id] || serviceImages['fabric-sofa'];
   const option = service.priceOptions[selectedOption];
+  const optionGroups = [...new Set(service.priceOptions.map((item) => item.group).filter(Boolean))];
+  const selectedGroup = option.group || optionGroups[0];
+  const visibleOptions = service.priceOptions
+    .map((item, index) => ({ item, index }))
+    .filter(({ item }) => !optionGroups.length || item.group === selectedGroup);
+
+  useEffect(() => {
+    if (initialSection !== 'options') {
+      return undefined;
+    }
+
+    const frame = requestAnimationFrame(() => {
+      if (scrollRef.current && optionsRef.current) {
+        scrollRef.current.scrollTop = Math.max(0, optionsRef.current.offsetTop - 16);
+      }
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [initialSection]);
 
   const toggleAddon = (label) => {
     setSelectedAddons((prev) => (
@@ -62,11 +83,12 @@ const ServiceDrawerPanel = ({ service, onClose }) => {
   );
 
   const handleAddToCart = () => {
+    const variant = option.group ? `${option.group} · ${option.label}` : option.label;
     addItem({
-      cartKey: `${service.id}-${option.label}-${selectedAddons.join(',')}`,
+      cartKey: `${service.id}-${variant}-${selectedAddons.join(',')}`,
       serviceId: service.id,
       name: service.name,
-      variant: option.label,
+      variant,
       addons: service.addons.filter((a) => selectedAddons.includes(a.label)),
       price: totalPrice(),
     });
@@ -111,7 +133,7 @@ const ServiceDrawerPanel = ({ service, onClose }) => {
         </button>
       </div>
 
-      <div className="service-drawer__scroll">
+      <div ref={scrollRef} className="service-drawer__scroll">
         <div className="service-drawer__content">
           <div className="service-drawer__head">
             <h2 className="service-drawer__title">{service.name}</h2>
@@ -125,16 +147,41 @@ const ServiceDrawerPanel = ({ service, onClose }) => {
 
           <p className="service-drawer__about">{service.about}</p>
 
-          <div>
-            <DrawerSectionLabel>Choose option</DrawerSectionLabel>
+          <div ref={optionsRef}>
+            {optionGroups.length > 0 && (
+              <>
+                <DrawerSectionLabel>Apartment type</DrawerSectionLabel>
+                <div className="service-drawer__types">
+                  {optionGroups.map((group) => (
+                    <button
+                      key={group}
+                      type="button"
+                      onClick={() => {
+                        const firstOption = service.priceOptions.findIndex((item) => item.group === group);
+                        setSelectedOption(firstOption);
+                      }}
+                      className={`service-drawer__type ${selectedGroup === group ? 'is-selected' : ''}`}
+                    >
+                      <span className="service-drawer__type-check" aria-hidden="true">
+                        {selectedGroup === group ? '✓' : ''}
+                      </span>
+                      {group}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+            <DrawerSectionLabel>
+              {optionGroups.length ? 'Choose home size' : 'Choose option'}
+            </DrawerSectionLabel>
             <div className="service-drawer__options">
-              {service.priceOptions.map((opt, i) => {
-                const isSelected = selectedOption === i;
+              {visibleOptions.map(({ item: opt, index }) => {
+                const isSelected = selectedOption === index;
                 return (
                   <button
-                    key={opt.label}
+                    key={`${opt.group || ''}-${opt.label}`}
                     type="button"
-                    onClick={() => setSelectedOption(i)}
+                    onClick={() => setSelectedOption(index)}
                     className={`service-drawer__option ${isSelected ? 'is-selected' : ''}`}
                   >
                     <div>
@@ -266,7 +313,9 @@ const ServiceDrawerPanel = ({ service, onClose }) => {
       <div className="service-drawer__footer">
         <div className="service-drawer__footer-summary">
           <span className="service-drawer__footer-label">
-            {selectedAddons.length ? `Base + ${selectedAddons.length} add-on(s)` : option.label}
+            {selectedAddons.length
+              ? `Base + ${selectedAddons.length} add-on(s)`
+              : [option.group, option.label].filter(Boolean).join(' · ')}
           </span>
           <span className="service-drawer__footer-price">
             ₹{totalPrice().toLocaleString()}
@@ -284,7 +333,7 @@ const ServiceDrawerPanel = ({ service, onClose }) => {
   );
 };
 
-export default function ServiceDetailDrawer({ service, open, onClose }) {
+export default function ServiceDetailDrawer({ service, open, initialSection = 'details', onClose }) {
   useEffect(() => {
     if (!open) {
       return undefined;
@@ -308,7 +357,12 @@ export default function ServiceDetailDrawer({ service, open, onClose }) {
         onClick={onClose}
         aria-label="Close service details"
       />
-      <ServiceDrawerPanel key={service.id} service={service} onClose={onClose} />
+      <ServiceDrawerPanel
+        key={`${service.id}-${initialSection}`}
+        service={service}
+        initialSection={initialSection}
+        onClose={onClose}
+      />
     </>,
     document.body,
   );

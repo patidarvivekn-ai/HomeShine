@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { globalContent } from '../data/services';
 import { officeAddress, site } from '../data/site';
+import BrandLogo from './BrandLogo';
 
 const SERVICE_LINKS = [
   ['Sofa & Carpet', '/services/sofa-carpet'],
@@ -48,8 +49,7 @@ export default function Footer() {
         <div className="site-footer__grid">
           <div>
             <div className="site-footer__brand">
-              <div className="site-footer__logo" aria-hidden="true">H</div>
-              Home Shine
+              <BrandLogo tone="light" />
             </div>
             <p className="site-footer__tagline">
               Professional deep cleaning for homes and businesses. Verified, trained, trusted.

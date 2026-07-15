@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingCart, Phone } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import BrandLogo from './BrandLogo';
 
 const LINKS = [
   ['Sofa & Carpet', '/services/sofa-carpet'],
@@ -18,8 +19,7 @@ export default function Navbar() {
     <header className="site-header">
       <div className="container site-header__inner">
         <Link to="/" className="site-header__logo" aria-label="Home Shine — home">
-          <div className="site-header__logo-mark" aria-hidden="true">H</div>
-          <span className="site-header__logo-text">Home&nbsp;Shine</span>
+          <BrandLogo />
         </Link>
 
         <nav className="site-header__nav" aria-label="Main navigation">
