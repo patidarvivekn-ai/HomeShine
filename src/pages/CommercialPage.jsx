@@ -13,7 +13,14 @@ import CategoryNav from '../components/CategoryNav';
 import SectionHeader from '../components/ui/SectionHeader';
 import StarRating from '../components/StarRating';
 import SmartImage from '../components/SmartImage';
+import Seo from '../components/Seo';
 import { TextField, SelectField, TextAreaField } from '../components/ui/Field';
+import {
+  buildCommercialQuoteWhatsAppMessage,
+  buildWhatsAppUrl,
+  createRequestReference,
+  openWhatsApp,
+} from '../utils/whatsapp';
 import {
   Building2,
   Sofa,
@@ -26,6 +33,7 @@ import {
   Calendar,
   CheckCircle,
   CircleCheck,
+  MessageCircle,
 } from 'lucide-react';
 
 const PROPERTY_TYPES = ['Office', 'Retail', 'Clinic', 'Restaurant', 'Educational institute', 'Other'];
@@ -59,6 +67,7 @@ export default function CommercialPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [confirmation, setConfirmation] = useState(null);
   const [errors, setErrors] = useState({});
 
   const setField = (name, val) => {
@@ -73,8 +82,8 @@ export default function CommercialPage() {
     if (!form.phone.trim() || !/^\d{10}$/.test(form.phone.replace(/\D/g, ''))) {
       nextErrors.phone = 'Valid 10-digit phone required';
     }
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) {
-      nextErrors.email = 'Valid email required';
+    if (form.email.trim() && !/\S+@\S+\.\S+/.test(form.email)) {
+      nextErrors.email = 'Enter a valid email or leave blank';
     }
     if (!form.propertyType) {
       nextErrors.propertyType = 'Please select a property type';
@@ -87,12 +96,25 @@ export default function CommercialPage() {
     const nextErrors = validate();
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length === 0) {
+      const reference = createRequestReference('HSQ');
+      const message = buildCommercialQuoteWhatsAppMessage({ reference, form });
+      setConfirmation({
+        reference,
+        message,
+        whatsappUrl: buildWhatsAppUrl(message),
+      });
+      openWhatsApp(message);
       setSubmitted(true);
     }
   };
 
   return (
     <div className="page-body">
+      <Seo
+        title="Commercial & Office Cleaning in Ahmedabad"
+        description="Request a custom Home Shine quote for office, retail, clinic, restaurant and commercial cleaning in Ahmedabad."
+        path="/services/commercial"
+      />
       <div className="commercial-hero">
         <SmartImage
           src={categoryImages.commercial}
@@ -183,8 +205,25 @@ export default function CommercialPage() {
                 </div>
                 <h3 className="commercial-quote__success-title">Thanks, {form.name}!</h3>
                 <p className="commercial-quote__success-text">
-                  Our business team will call you within 24 hours with a custom quote.
+                  Send the prepared WhatsApp message and our business team will respond within 24 hours.
                 </p>
+                <p className="commercial-quote__reference">
+                  Reference: <strong>{confirmation?.reference}</strong>
+                </p>
+                <a
+                  href={confirmation?.whatsappUrl || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-lg btn-block booking-success__whatsapp"
+                  onClick={(event) => {
+                    if (confirmation?.message) {
+                      event.preventDefault();
+                      openWhatsApp(confirmation.message);
+                    }
+                  }}
+                >
+                  <MessageCircle size={18} /> Send on WhatsApp
+                </a>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="commercial-quote__form" noValidate>
@@ -220,14 +259,13 @@ export default function CommercialPage() {
                     required
                   />
                   <TextField
-                    label="Email"
+                    label="Email (optional)"
                     name="email"
                     type="email"
                     value={form.email}
                     onChange={(v) => setField('email', v)}
                     error={errors.email}
                     placeholder="you@company.com"
-                    required
                   />
                 </div>
 
@@ -286,7 +324,7 @@ export default function CommercialPage() {
                 />
 
                 <button type="submit" className="btn btn-lg btn-block btn-commercial">
-                  Request a quote →
+                  Continue on WhatsApp →
                 </button>
               </form>
             )}

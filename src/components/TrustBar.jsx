@@ -32,7 +32,7 @@ export default function TrustBar() {
           <p className="promise__note">
             All services include free re-clean within 30 days if you&apos;re not satisfied.
           </p>
-          <a href="tel:+8000384002" className="btn btn-primary shrink-0">
+          <a href="tel:+918000384002" className="btn btn-primary shrink-0">
             <Phone size={15} /> Call now
           </a>
         </div>

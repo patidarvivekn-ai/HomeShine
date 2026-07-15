@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import TrustBar from '../components/TrustBar';
 import OrderSummary from '../components/ui/OrderSummary';
+import Seo from '../components/Seo';
 
 export default function CartPage() {
   const { items, total, updateQty, removeItem } = useCart();
@@ -11,6 +11,12 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="page-body container">
+        <Seo
+          title="Your cart"
+          description="Review the Home Shine cleaning services in your cart."
+          path="/cart"
+          noIndex
+        />
         <div className="cart-empty">
           <div className="cart-empty__icon" aria-hidden="true">
             <ShoppingBag size={36} />
@@ -45,6 +51,12 @@ export default function CartPage() {
 
   return (
     <div className="page-body">
+      <Seo
+        title="Your cart"
+        description="Review the Home Shine cleaning services in your cart."
+        path="/cart"
+        noIndex
+      />
       <div className="container cart-page">
         <h1 className="cart-page__title">Your cart</h1>
 

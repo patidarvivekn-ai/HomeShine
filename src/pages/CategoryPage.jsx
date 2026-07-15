@@ -9,6 +9,7 @@ import StarRating from '../components/StarRating';
 import SmartImage from '../components/SmartImage';
 import CategoryNav from '../components/CategoryNav';
 import Breadcrumb from '../components/ui/Breadcrumb';
+import Seo from '../components/Seo';
 import { PackageOpen } from 'lucide-react';
 
 const CAT_FALLBACK = {
@@ -32,6 +33,12 @@ export default function CategoryPage() {
   if (!category) {
     return (
       <div className="page-body container py-20 text-center">
+        <Seo
+          title="Category not found"
+          description="The requested Home Shine service category could not be found."
+          path={`/services/${slug}`}
+          noIndex
+        />
         <p className="text-lg" style={{ color: 'var(--text-muted)' }}>Category not found.</p>
         <Link to="/" className="btn btn-primary mt-5">← Back to home</Link>
       </div>
@@ -42,6 +49,11 @@ export default function CategoryPage() {
 
   return (
     <div className="page-body">
+      <Seo
+        title={`${category.name} in Ahmedabad`}
+        description={category.intro || `Professional ${category.name.toLowerCase()} services in Ahmedabad from Home Shine.`}
+        path={`/services/${slug}`}
+      />
       {/* Category hero — overlay is a sibling so it always covers full banner */}
       <div className="category-hero">
         <SmartImage

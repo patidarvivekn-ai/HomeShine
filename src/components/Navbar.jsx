@@ -39,10 +39,10 @@ export default function Navbar() {
         </nav>
 
         <div className="site-header__actions">
-          <a href="tel:+8000384002" className="btn btn-sm site-header__phone">
+          <a href="tel:+918000384002" className="btn btn-sm site-header__phone">
             <Phone size={14} /> 8000384002
           </a>
-          <a href="tel:+8000384002" className="site-header__phone-icon" aria-label="Call 8000384002">
+          <a href="tel:+918000384002" className="site-header__phone-icon" aria-label="Call 8000384002">
             <Phone size={18} />
           </a>
           <button

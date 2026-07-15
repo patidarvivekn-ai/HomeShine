@@ -14,10 +14,12 @@ import {
 import Breadcrumb from '../components/ui/Breadcrumb';
 import { TextField, TextAreaField } from '../components/ui/Field';
 import OrderSummary, { LineItems } from '../components/ui/OrderSummary';
+import Seo from '../components/Seo';
 import {
   buildBookingWhatsAppMessage,
   openWhatsApp,
   buildWhatsAppUrl,
+  createRequestReference,
 } from '../utils/whatsapp';
 
 const SLOTS = ['7:00 AM', '9:00 AM', '11:00 AM', '1:00 PM', '3:00 PM', '5:00 PM'];
@@ -143,7 +145,9 @@ export default function BookingPage() {
       return;
     }
 
+    const reference = createRequestReference('HS');
     const message = buildBookingWhatsAppMessage({
+      reference,
       contact,
       address,
       selectedDate,
@@ -155,6 +159,7 @@ export default function BookingPage() {
 
     // Snapshot details before clearing the cart (needed for success screen + WhatsApp).
     setConfirmation({
+      reference,
       email: contact.email,
       phone: contact.phone,
       name: contact.name,
@@ -177,6 +182,12 @@ export default function BookingPage() {
   if (items.length === 0 && !submitted) {
     return (
       <div className="page-body container">
+        <Seo
+          title="Complete your booking"
+          description="Complete your Home Shine cleaning service booking."
+          path="/booking"
+          noIndex
+        />
         <div className="cart-empty">
           <div className="cart-empty__icon" aria-hidden="true">
             <ShoppingBag size={36} />
@@ -196,15 +207,24 @@ export default function BookingPage() {
   if (submitted) {
     return (
       <div className="page-body container">
+        <Seo
+          title="Booking details ready"
+          description="Send your prepared Home Shine booking details through WhatsApp."
+          path="/booking"
+          noIndex
+        />
         <div className="booking-success">
           <div className="booking-success__icon" aria-hidden="true">
             <CircleCheck size={36} />
           </div>
-          <h1 className="booking-success__title">Booking confirmed!</h1>
+          <h1 className="booking-success__title">Almost done!</h1>
           <p className="booking-success__text">
-            Your booking is ready. Send the details to us on WhatsApp to finalize.
+            Send the prepared message in WhatsApp to confirm your booking.
           </p>
           <div className="booking-success__details">
+            <p className="booking-success__reference">
+              Reference: <strong>{confirmation?.reference}</strong>
+            </p>
             <p>
               {confirmation?.dateLabel || (selectedDate && formatDay(selectedDate))}
               {' · '}
@@ -215,7 +235,7 @@ export default function BookingPage() {
           <p className="booking-success__note">
             Our professional will call you 30 minutes before arriving.
             Questions? Call{' '}
-            <a href="tel:8000384002" className="link-accent">8000384002</a>.
+            <a href="tel:+918000384002" className="link-accent">8000384002</a>.
           </p>
           <div className="booking-success__actions">
             <a
@@ -243,6 +263,12 @@ export default function BookingPage() {
 
   return (
     <div className="page-body container booking-page">
+      <Seo
+        title="Complete your booking"
+        description="Choose your cleaning schedule and send your Home Shine booking through WhatsApp."
+        path="/booking"
+        noIndex
+      />
       <Breadcrumb
         items={[
           { label: 'Home', to: '/' },

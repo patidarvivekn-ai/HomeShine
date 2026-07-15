@@ -7,6 +7,8 @@ import FAQSection from '../components/FAQSection';
 import StarRating from '../components/StarRating';
 import SmartImage from '../components/SmartImage';
 import SectionHeader from '../components/ui/SectionHeader';
+import Seo from '../components/Seo';
+import { officeAddress, site, siteOrigin } from '../data/site';
 import { ArrowRight, Star, Shield, Leaf, Clock, Phone } from 'lucide-react';
 
 const PILLS = [
@@ -25,9 +27,38 @@ const CAT_FALLBACK = {
 };
 const HERO_FALLBACK = ['fabric-sofa', 'bathroom-kitchen-combo', 'kitchen', 'carpet'];
 
+const LOCAL_BUSINESS_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: site.legalName,
+  ...(siteOrigin ? { url: siteOrigin } : {}),
+  telephone: site.phoneInternational,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.locality,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  areaServed: site.areaServed,
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '07:00',
+    closes: '20:00',
+  }],
+};
+
 export default function Home() {
   return (
     <div className="page-body">
+      <Seo
+        title="Deep Cleaning Services in Ahmedabad | Home Shine"
+        description={`Book verified professionals for sofa, carpet, bathroom, full-home and commercial cleaning in Ahmedabad. Call ${site.phoneDisplay}. Office: ${officeAddress}.`}
+        path="/"
+        jsonLd={LOCAL_BUSINESS_JSON_LD}
+      />
       {/* Hero */}
       <section className="hero">
         <div className="container hero__container">
@@ -35,7 +66,7 @@ export default function Home() {
             <div className="hero__content stack stack--lg">
               <div className="hero__badge">
                 <Star size={12} fill="var(--gold)" strokeWidth={0} />
-                Trusted by 10,000+ Indian families
+                Trusted cleaning experts in Ahmedabad
               </div>
 
               <h1 className="hero__title">
@@ -44,8 +75,7 @@ export default function Home() {
               </h1>
 
               <p className="hero__lead">
-                Background-verified professionals arrive at your door with all equipment.
-                Sofa, carpet, bathroom, full apartment, commercial — we&apos;ve got it covered.
+                Book verified, fully equipped professionals for home and commercial cleaning.
               </p>
 
               <div className="hero__stats">
@@ -61,8 +91,8 @@ export default function Home() {
                 <Link to="/services/sofa-carpet" className="btn btn-primary btn-lg">
                   Explore services <ArrowRight size={16} />
                 </Link>
-                <a href="tel:+8000384002" className="btn btn-dark btn-lg">
-                  <Phone size={16} /> 8000384002
+                <a href={`tel:${site.phoneInternational}`} className="btn btn-dark btn-lg">
+                  <Phone size={16} /> {site.phoneDisplay}
                 </a>
               </div>
             </div>
@@ -139,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* Promise, How it works, FAQ */}
-      <div className="container home-sections">
+      <div className="container home-sections home-sections--home">
         <TrustBar />
         <HowItWorks />
         <FAQSection faqs={globalContent.faqs} title="Common Questions" />

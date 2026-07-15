@@ -34,7 +34,7 @@ export default function BottomNav() {
             </Link>
           );
         })}
-        <a href="tel:8000384002" className="bottom-nav__item">
+        <a href="tel:+918000384002" className="bottom-nav__item">
           <span className="bottom-nav__icon-wrap">
             <Phone size={22} strokeWidth={1.8} aria-hidden="true" />
           </span>
