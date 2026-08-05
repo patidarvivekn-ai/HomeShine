@@ -10,6 +10,7 @@ import CategoryPage from './pages/CategoryPage';
 import CommercialPage from './pages/CommercialPage';
 import CartPage from './pages/CartPage';
 import BookingPage from './pages/BookingPage';
+import QuotationPage from './pages/QuotationPage';
 import {
   CancellationPolicy,
   PrivacyPolicy,
@@ -31,6 +32,7 @@ export default function App() {
               <Route path="/services/:slug" element={<CategoryPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/booking" element={<BookingPage />} />
+              <Route path="/quotation" element={<QuotationPage />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/cancellation" element={<CancellationPolicy />} />
