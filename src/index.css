@@ -2328,6 +2328,26 @@ textarea.field { resize: none; line-height: 1.5; }
   margin-top: 0.15em;
 }
 .site-footer__contact-item svg { flex-shrink: 0; }
+.site-footer__review-qr {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+}
+.site-footer__review-qr img {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  background: #fff;
+  padding: 4px;
+}
+@media (hover: hover) {
+  .site-footer__review-qr:hover { color: #fff; }
+}
 .site-footer__contact-item--whatsapp {
   color: #25D366;
 }

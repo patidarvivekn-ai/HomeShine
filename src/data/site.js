@@ -16,8 +16,8 @@ export const site = {
   },
   hoursDisplay: 'Mon–Sun, 7 AM – 8 PM',
   areaServed: ['Ahmedabad', 'Gandhinagar'],
-  // Official Google Business reviews. Replace with your Place / reviews URL when you have it.
-  reviewsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Home Shine Deep Cleaning Thaltej Ahmedabad')}`,
+  reviewsUrl: 'https://g.page/r/CeetTonMVzvTEBM',
+  writeReviewUrl: 'https://g.page/r/CeetTonMVzvTEBM/review',
 };
 
 export const officeAddress = [

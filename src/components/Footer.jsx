@@ -17,6 +17,7 @@ import { officeAddress, site } from '../data/site';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import BrandLogo from './BrandLogo';
 import WhatsAppIcon from './WhatsAppIcon';
+import reviewQr from '../assets/google-review-qr.svg';
 
 const WHATSAPP_URL = buildWhatsAppUrl(
   'Hi, I need help with Home Shine cleaning services.',
@@ -143,6 +144,23 @@ export default function Footer() {
                   className="site-footer__contact-item"
                 >
                   <Star size={14} /> Google reviews
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.writeReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="site-footer__review-qr"
+                  aria-label="Scan or tap to leave a Google review"
+                >
+                  <img
+                    src={reviewQr}
+                    alt="QR code for Home Shine Google reviews"
+                    width="96"
+                    height="96"
+                  />
+                  <span>Scan to review us</span>
                 </a>
               </li>
             </ul>
