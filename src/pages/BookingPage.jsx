@@ -15,6 +15,8 @@ import Breadcrumb from '../components/ui/Breadcrumb';
 import { TextField, TextAreaField } from '../components/ui/Field';
 import OrderSummary, { LineItems } from '../components/ui/OrderSummary';
 import Seo from '../components/Seo';
+import WhatsAppIcon from '../components/WhatsAppIcon';
+import { site } from '../data/site';
 import {
   buildBookingWhatsAppMessage,
   openWhatsApp,
@@ -22,24 +24,34 @@ import {
   createRequestReference,
 } from '../utils/whatsapp';
 
-const SLOTS = ['7:00 AM', '9:00 AM', '11:00 AM', '1:00 PM', '3:00 PM', '5:00 PM'];
+const SLOTS = [
+  { label: '7:00 AM', hour: 7 },
+  { label: '9:00 AM', hour: 9 },
+  { label: '11:00 AM', hour: 11 },
+  { label: '1:00 PM', hour: 13 },
+  { label: '3:00 PM', hour: 15 },
+  { label: '5:00 PM', hour: 17 },
+];
 const STEPS = ['Schedule', 'Address', 'Contact', 'Confirm'];
+const SERVED_CITY = /ahmedabad|gandhinagar|amdavad/i;
+const SERVED_PIN = /^38[02]\d{3}$/;
 
-const WhatsAppGlyph = ({ size = 18 }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-  </svg>
-);
-
-const getNext7Days = () => {
+const getBookingDays = () => {
   const days = [];
   const now = new Date();
-  for (let i = 1; i <= 7; i += 1) {
+  for (let i = 0; i <= 6; i += 1) {
     const d = new Date(now);
     d.setDate(now.getDate() + i);
     days.push(d);
   }
   return days;
+};
+
+const isToday = (d) => d.toDateString() === new Date().toDateString();
+
+const isSlotOpen = (date, hour) => {
+  if (!date || !isToday(date)) return true;
+  return hour > new Date().getHours() + 1;
 };
 
 const formatDay = (d) => (
@@ -88,7 +100,8 @@ export default function BookingPage() {
   const [submitted, setSubmitted] = useState(false);
   const [confirmation, setConfirmation] = useState(null);
 
-  const days = getNext7Days();
+  const days = getBookingDays();
+  const openSlots = SLOTS.filter((slot) => isSlotOpen(selectedDate, slot.hour));
 
   const setAddr = (key, value) => {
     setAddress((prev) => ({ ...prev, [key]: value }));
@@ -103,7 +116,7 @@ export default function BookingPage() {
     if (!selectedDate) {
       nextErrors.date = 'Please select a date';
     }
-    if (!selectedSlot) {
+    if (!selectedSlot || !openSlots.some((slot) => slot.label === selectedSlot)) {
       nextErrors.slot = 'Please select a time slot';
     }
     setErrors(nextErrors);
@@ -115,11 +128,11 @@ export default function BookingPage() {
     if (!address.line1.trim()) {
       nextErrors.line1 = 'Address is required';
     }
-    if (!address.city.trim()) {
-      nextErrors.city = 'City is required';
+    if (!SERVED_CITY.test(address.city.trim())) {
+      nextErrors.city = 'We currently serve Ahmedabad and Gandhinagar';
     }
-    if (!address.pincode.trim() || !/^\d{6}$/.test(address.pincode)) {
-      nextErrors.pincode = 'Valid 6-digit PIN required';
+    if (!SERVED_PIN.test(address.pincode.trim())) {
+      nextErrors.pincode = 'Enter an Ahmedabad / Gandhinagar PIN (380xxx or 382xxx)';
     }
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -172,6 +185,9 @@ export default function BookingPage() {
 
     openWhatsApp(message);
     setSubmitted(true);
+  };
+
+  const handleBookingSent = () => {
     clearCart();
   };
 
@@ -217,9 +233,10 @@ export default function BookingPage() {
           <div className="booking-success__icon" aria-hidden="true">
             <CircleCheck size={36} />
           </div>
-          <h1 className="booking-success__title">Almost done!</h1>
+          <h1 className="booking-success__title">Send to confirm</h1>
           <p className="booking-success__text">
-            Send the prepared message in WhatsApp to confirm your booking.
+            Your cart is saved. Send the WhatsApp message so we receive your booking.
+            If WhatsApp did not open, tap the button again.
           </p>
           <div className="booking-success__details">
             <p className="booking-success__reference">
@@ -235,7 +252,7 @@ export default function BookingPage() {
           <p className="booking-success__note">
             Our professional will call you 30 minutes before arriving.
             Questions? Call{' '}
-            <a href="tel:+918000384002" className="link-accent">8000384002</a>.
+            <a href={`tel:${site.phoneInternational}`} className="link-accent">{site.phoneDisplay}</a>.
           </p>
           <div className="booking-success__actions">
             <a
@@ -250,10 +267,14 @@ export default function BookingPage() {
                 }
               }}
             >
-              <WhatsAppGlyph size={20} /> Send on WhatsApp
+              <WhatsAppIcon size={20} /> Send on WhatsApp
             </a>
-            <Link to="/" className="btn btn-secondary btn-lg btn-block">
-              Back to home
+            <Link
+              to="/"
+              className="btn btn-secondary btn-lg btn-block"
+              onClick={handleBookingSent}
+            >
+              I&apos;ve sent it — done
             </Link>
           </div>
         </div>
@@ -344,7 +365,15 @@ export default function BookingPage() {
                         key={d.toISOString()}
                         active={isActive}
                         ariaLabel={`Select ${dayLabel}`}
-                        onClick={() => setSelectedDate(d)}
+                        onClick={() => {
+                          setSelectedDate(d);
+                          if (selectedSlot) {
+                            const match = SLOTS.find((slot) => slot.label === selectedSlot);
+                            if (match && !isSlotOpen(d, match.hour)) {
+                              setSelectedSlot(null);
+                            }
+                          }
+                        }}
                       >
                         <div className="booking-choice__weekday">
                           {d.toLocaleDateString('en-IN', { weekday: 'short' })}
@@ -365,17 +394,20 @@ export default function BookingPage() {
                   Select time slot
                 </p>
                 <div className="booking-step__choices booking-step__choices--slots">
-                  {SLOTS.map((slot) => (
+                  {openSlots.map((slot) => (
                     <BookingChoice
-                      key={slot}
-                      active={selectedSlot === slot}
-                      ariaLabel={`Select ${slot}`}
-                      onClick={() => setSelectedSlot(slot)}
+                      key={slot.label}
+                      active={selectedSlot === slot.label}
+                      ariaLabel={`Select ${slot.label}`}
+                      onClick={() => setSelectedSlot(slot.label)}
                     >
-                      {slot}
+                      {slot.label}
                     </BookingChoice>
                   ))}
                 </div>
+                {selectedDate && isToday(selectedDate) && openSlots.length === 0 && (
+                  <p className="field-error">No same-day slots left — please pick another date.</p>
+                )}
                 {errors.slot && <p className="field-error">{errors.slot}</p>}
               </div>
 
@@ -409,7 +441,7 @@ export default function BookingPage() {
                     value={address.city}
                     onChange={(v) => setAddr('city', v)}
                     error={errors.city}
-                    placeholder="Mumbai"
+                    placeholder="Ahmedabad"
                     required
                   />
                   <TextField
@@ -420,7 +452,7 @@ export default function BookingPage() {
                     value={address.pincode}
                     onChange={(v) => setAddr('pincode', v)}
                     error={errors.pincode}
-                    placeholder="400001"
+                    placeholder="380059"
                     required
                   />
                 </div>

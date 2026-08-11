@@ -148,7 +148,7 @@ export const FIXED = {
     'Customer to provide water, electricity & ladder access.',
     'Construction debris / paint removal quoted separately if heavy.',
     'Wardrobe & kitchen items should be emptied for inside cleaning.',
-    'Re-cleaning request within 24 hrs attended free for missed spots.',
+    'Missed spots: re-clean within 24 hours. Website bookings also carry a 30-day satisfaction re-clean.',
     'Glass breakage due to old fittings not covered — handled with care.',
   ],
   payment: [
@@ -159,7 +159,7 @@ export const FIXED = {
     'For AMC / Society / Govt Tenders — separate rate card available.',
   ],
   nextSteps:
-    'Confirm date/time, share location on WhatsApp 8000384001. Team reaches with material.',
+    'Confirm date/time, share location on WhatsApp 8000384002 / 8000384001. Team reaches with material.',
 };
 
 export function formatInr(n) {

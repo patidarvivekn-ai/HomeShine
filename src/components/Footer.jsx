@@ -9,10 +9,18 @@ import {
   Sparkles,
   Shield,
   Calendar,
+  Star,
+  Mail,
 } from 'lucide-react';
 import { globalContent } from '../data/services';
 import { officeAddress, site } from '../data/site';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 import BrandLogo from './BrandLogo';
+import WhatsAppIcon from './WhatsAppIcon';
+
+const WHATSAPP_URL = buildWhatsAppUrl(
+  'Hi, I need help with Home Shine cleaning services.',
+);
 
 const SERVICE_LINKS = [
   ['Sofa & Carpet', '/services/sofa-carpet'],
@@ -40,6 +48,14 @@ export default function Footer() {
             <Link to="/services/sofa-carpet" className="btn btn-primary">
               Book now <ArrowRight size={15} />
             </Link>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-whatsapp"
+            >
+              <WhatsAppIcon size={16} /> WhatsApp
+            </a>
             <a href={`tel:${site.phoneInternational}`} className="btn btn-dark">
               <Phone size={15} /> Call
             </a>
@@ -92,6 +108,21 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="site-footer__contact-item site-footer__contact-item--whatsapp"
+                >
+                  <WhatsAppIcon size={15} /> WhatsApp
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${site.email}`} className="site-footer__contact-item">
+                  <Mail size={14} /> {site.email}
+                </a>
+              </li>
+              <li>
+                <a
                   href={OFFICE_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -103,6 +134,16 @@ export default function Footer() {
               </li>
               <li className="site-footer__contact-item">
                 <Clock size={14} /> {site.hoursDisplay}
+              </li>
+              <li>
+                <a
+                  href={site.reviewsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="site-footer__contact-item"
+                >
+                  <Star size={14} /> Google reviews
+                </a>
               </li>
             </ul>
           </div>

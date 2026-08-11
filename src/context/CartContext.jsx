@@ -1,6 +1,26 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 
 const CartContext = createContext(null);
+const STORAGE_KEY = 'homeshine-cart';
+
+function loadCart() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return { items: [] };
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed.items)) return { items: [] };
+    return {
+      items: parsed.items.filter((item) => (
+        item?.cartKey
+        && item?.name
+        && Number(item.price) > 0
+        && Number(item.qty) > 0
+      )),
+    };
+  } catch {
+    return { items: [] };
+  }
+}
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -37,9 +57,20 @@ function cartReducer(state, action) {
 }
 
 export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, { items: [] });
+  const [state, dispatch] = useReducer(cartReducer, undefined, loadCart);
 
-  const addItem = (item) => dispatch({ type: 'ADD_ITEM', payload: item });
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ items: state.items }));
+    } catch {
+      // Ignore quota / private-mode failures.
+    }
+  }, [state.items]);
+
+  const addItem = (item) => {
+    if (!item?.price || item.price <= 0) return;
+    dispatch({ type: 'ADD_ITEM', payload: item });
+  };
   const removeItem = (cartKey) => dispatch({ type: 'REMOVE_ITEM', payload: cartKey });
   const updateQty = (cartKey, qty) => dispatch({ type: 'UPDATE_QTY', payload: { cartKey, qty } });
   const clearCart = () => dispatch({ type: 'CLEAR' });

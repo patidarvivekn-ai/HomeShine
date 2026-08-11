@@ -1,5 +1,6 @@
 import { Phone, BadgeCheck, Leaf, Sparkles, Shield, Calendar } from 'lucide-react';
 import { globalContent } from '../data/services';
+import { site } from '../data/site';
 
 const PROMISE_ICONS = [BadgeCheck, Leaf, Sparkles, Shield, Calendar];
 
@@ -7,6 +8,7 @@ export default function TrustBar() {
   return (
     <section className="promise" aria-label="The Home Shine Promise">
       <div className="promise__glow" aria-hidden="true" />
+      <div className="promise__glow promise__glow--gold" aria-hidden="true" />
 
       <div className="promise__inner">
         <div className="promise__head">
@@ -32,7 +34,7 @@ export default function TrustBar() {
           <p className="promise__note">
             All services include free re-clean within 30 days if you&apos;re not satisfied.
           </p>
-          <a href="tel:+918000384002" className="btn btn-primary shrink-0">
+          <a href={`tel:${site.phoneInternational}`} className="btn btn-primary shrink-0">
             <Phone size={15} /> Call now
           </a>
         </div>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { categories, globalContent } from '../data/services';
-import { categoryImages, heroCollage, heroCollageIds } from '../data/images';
+import { categoryImages, heroCollage } from '../data/images';
 import TrustBar from '../components/TrustBar';
 import HowItWorks from '../components/HowItWorks';
 import FAQSection from '../components/FAQSection';
@@ -9,7 +9,7 @@ import SmartImage from '../components/SmartImage';
 import SectionHeader from '../components/ui/SectionHeader';
 import Seo from '../components/Seo';
 import { officeAddress, site, siteOrigin } from '../data/site';
-import { ArrowRight, Star, Shield, Leaf, Clock, Phone } from 'lucide-react';
+import { ArrowRight, Star, Shield, Leaf, Clock, Phone, Sparkles } from 'lucide-react';
 
 const PILLS = [
   { icon: <Leaf size={14} />, text: 'Eco-safe products' },
@@ -25,7 +25,36 @@ const CAT_FALLBACK = {
   'full-home': 'apartment',
   'commercial': 'commercial',
 };
-const HERO_FALLBACK = ['fabric-sofa', 'bathroom-kitchen-combo', 'kitchen', 'carpet'];
+const HERO_TILES = [
+  {
+    fallbackId: 'fabric-sofa',
+    photoKey: 'hero-1',
+    to: '/services/sofa-carpet',
+    label: 'Sofa',
+    aria: 'Sofa & Carpet cleaning',
+  },
+  {
+    fallbackId: 'bathroom-kitchen-combo',
+    photoKey: 'hero-2',
+    to: '/services/bathroom-kitchen?tab=Bathroom%20cleaning',
+    label: 'Bathroom',
+    aria: 'Bathroom cleaning',
+  },
+  {
+    fallbackId: 'kitchen',
+    photoKey: 'hero-3',
+    to: '/services/bathroom-kitchen?tab=Kitchen%20cleaning',
+    label: 'Kitchen',
+    aria: 'Kitchen cleaning',
+  },
+  {
+    fallbackId: 'carpet',
+    photoKey: 'hero-4',
+    to: '/services/commercial',
+    label: 'Office',
+    aria: 'Commercial and office cleaning',
+  },
+];
 
 const LOCAL_BUSINESS_JSON_LD = {
   '@context': 'https://schema.org',
@@ -33,6 +62,9 @@ const LOCAL_BUSINESS_JSON_LD = {
   name: site.legalName,
   ...(siteOrigin ? { url: siteOrigin } : {}),
   telephone: site.phoneInternational,
+  email: site.email,
+  image: `${siteOrigin || site.website}/og-share.jpg`,
+  priceRange: '₹₹',
   address: {
     '@type': 'PostalAddress',
     streetAddress: site.address.street,
@@ -61,11 +93,22 @@ export default function Home() {
       />
       {/* Hero */}
       <section className="hero">
+        <div className="hero__atmosphere" aria-hidden="true">
+          <span className="hero__orb hero__orb--1" />
+          <span className="hero__orb hero__orb--2" />
+          <span className="hero__orb hero__orb--3" />
+          <span className="hero__spark hero__spark--1" />
+          <span className="hero__spark hero__spark--2" />
+          <span className="hero__spark hero__spark--3" />
+          <span className="hero__spark hero__spark--4" />
+          <span className="hero__grain" />
+        </div>
+
         <div className="container hero__container">
           <div className="hero__layout">
             <div className="hero__content stack stack--lg">
               <div className="hero__badge">
-                <Star size={12} fill="var(--gold)" strokeWidth={0} />
+                <Sparkles size={12} />
                 Trusted cleaning experts in Ahmedabad
               </div>
 
@@ -79,12 +122,26 @@ export default function Home() {
               </p>
 
               <div className="hero__stats">
-                {[['10K+', 'Happy homes'], ['4.84★', 'Avg. rating'], ['30-day', 'Guarantee']].map(([val, label]) => (
-                  <div key={val}>
-                    <div className="hero__stat-value">{val}</div>
-                    <div className="hero__stat-label">{label}</div>
+                <div className="hero__stat">
+                  <div className="hero__stat-value">Local</div>
+                  <div className="hero__stat-label">Ahmedabad &amp; GN</div>
+                </div>
+                <a
+                  href={site.reviewsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero__stat hero__stat--link"
+                >
+                  <div className="hero__stat-value">
+                    <Star size={15} fill="var(--gold)" color="var(--gold)" />
+                    Reviews
                   </div>
-                ))}
+                  <div className="hero__stat-label">See Google reviews</div>
+                </a>
+                <div className="hero__stat">
+                  <div className="hero__stat-value">30-day</div>
+                  <div className="hero__stat-label">Guarantee</div>
+                </div>
               </div>
 
               <div className="hero__actions">
@@ -98,17 +155,30 @@ export default function Home() {
             </div>
 
             <div className="hero__collage">
-              {heroCollage.map((src, i) => (
-                <SmartImage
-                  key={HERO_FALLBACK[i]}
-                  src={src}
-                  fallbackId={HERO_FALLBACK[i]}
-                  photoKey={heroCollageIds[i]}
-                  variant="card"
-                  sizes="(max-width: 1023px) 45vw, 200px"
-                  className={`rounded-2xl img-wrap--zoom hero__collage-tile hero__collage-tile--${i + 1}`}
-                  style={{ aspectRatio: '4/3' }}
-                />
+              {HERO_TILES.map((tile, i) => (
+                <Link
+                  key={tile.photoKey}
+                  to={tile.to}
+                  className={`hero__collage-link hero__collage-tile hero__collage-tile--${i + 1}`}
+                  aria-label={`View ${tile.aria} services`}
+                >
+                  <SmartImage
+                    src={heroCollage[i]}
+                    alt=""
+                    fallbackId={tile.fallbackId}
+                    photoKey={tile.photoKey}
+                    variant="card"
+                    sizes="(max-width: 767px) 22vw, (max-width: 1023px) 45vw, 220px"
+                    eager={i === 0}
+                    className="img-wrap--zoom hero__collage-media"
+                  >
+                    <span className="hero__collage-veil" aria-hidden="true" />
+                    <span className="hero__collage-label">
+                      {tile.label}
+                      <ArrowRight size={12} />
+                    </span>
+                  </SmartImage>
+                </Link>
               ))}
             </div>
           </div>

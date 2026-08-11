@@ -8,9 +8,9 @@ export const globalContent = {
   ],
   howItWorks: [
     { step: 1, title: 'Choose a service', desc: 'Pick your items and a time slot that suits you.' },
-    { step: 2, title: 'Expert arrives', desc: 'A verified professional reaches your door with all equipment.' },
-    { step: 3, title: 'Deep clean', desc: 'Done on site with professional-grade products.' },
-    { step: 4, title: 'Inspect & relax', desc: 'Check the result, backed by our 30-day guarantee.' },
+    { step: 2, title: 'Send on WhatsApp', desc: 'We prepare your booking message — send it so we receive the request.' },
+    { step: 3, title: 'Expert arrives', desc: 'A verified professional reaches your door with all equipment.' },
+    { step: 4, title: 'Deep clean & inspect', desc: 'Done on site, then you check the result — backed by our 30-day guarantee.' },
   ],
   faqs: [
     { q: 'Do I need to provide anything?', a: 'No — our professionals bring all equipment and chemicals. We only need access to water and a power point.' },
@@ -201,7 +201,7 @@ export const services = {
       priceOptions: [
         { label: 'Fabric recliner', price: 249, duration: '~25 mins' },
         { label: 'Leather recliner', price: 449, duration: '~30 mins' },
-        { label: 'Per additional recliner', price: 599, duration: '~20 mins' },
+        { label: 'Per additional recliner', price: 199, duration: '~20 mins' },
       ],
       included: [
         'Dry & wet vacuuming of all surfaces',
@@ -319,8 +319,8 @@ export const services = {
       priceOptions: [
         { label: 'Small rug (up to 20 sq ft)', price: 499, duration: '~50 mins' },
         { label: 'Medium carpet (20–60 sq ft)', price: 899, duration: '~90 mins' },
-        { label: 'Large carpet Above 500 (per sq ft)', price: 10, duration: 'varies' },
-        { label: 'Shaggy / high-pile surcharge', price: 0, note: '+20%', duration: 'varies' },
+        { label: 'Large carpet (above 60 sq ft, per sq ft)', price: 10, duration: 'varies' },
+        { label: 'Shaggy / high-pile surcharge', price: 180, note: 'Added to carpet size', duration: '+15 mins' },
       ],
       included: [
         'Dry vacuuming to remove surface dust',
@@ -511,9 +511,9 @@ export const services = {
       ],
       about: 'Bundle your most-used rooms and save versus booking separately. Best value for a pre-festival or move-in refresh.',
       priceOptions: [
-        { label: '1 Bathroom + 1 Kitchen (classic)', price: 499, duration: '~2.5 hrs', note: 'Save ~15%' },
-        { label: '2 Bathrooms + 1 Kitchen', price: 949, duration: '~3.5 hrs', note: 'Save ~18%' },
-        { label: 'Full bathroom + kitchen + 1 appliance', price: 549, duration: '~4 hrs', note: 'Save ~20%' },
+        { label: '1 Bathroom + 1 Kitchen (classic)', price: 1569, duration: '~2.5 hrs', note: 'Save ~15%' },
+        { label: '2 Bathrooms + 1 Kitchen (classic)', price: 1879, duration: '~3.5 hrs', note: 'Save ~18%' },
+        { label: 'Intense bath + classic kitchen + microwave', price: 1759, duration: '~4 hrs', note: 'Save ~20%' },
       ],
       included: [
         'Full bathroom deep clean (Intense level)',
@@ -667,7 +667,7 @@ export const services = {
       cardBullets: [
         'Refrigerator, microwave, chimney, washing machine',
         'Gas hob / stove cleaning',
-        '10% off second appliance same visit',
+        'Ask on WhatsApp for 10% off a second appliance on the same visit',
       ],
       about: 'Appliances accumulate grease, limescale and bacteria inside. Our specialist cleaning extends lifespan and keeps food safe.',
       priceOptions: [
@@ -708,7 +708,7 @@ export const services = {
     {
       id: 'apartment',
       tab: 'Full apartment',
-      name: '1 BHK Full Apartment Deep Cleaning',
+      name: 'Full Apartment Deep Cleaning',
       rating: 4.82,
       reviews: '1,200',
       startsAt: 2999,
@@ -727,8 +727,8 @@ export const services = {
         { label: '2 BHK', group: 'Unfurnished apartment', price: 4499, duration: '5–6 hrs' },
         { label: '3 BHK', group: 'Furnished apartment', price: 6999, duration: '7–8 hrs' },
         { label: '3 BHK', group: 'Unfurnished apartment', price: 5449, duration: '7–8 hrs' },
-        { label: '4 BHK', group: 'Furnished apartment', price: 9000, duration: 'full day' },
-        { label: '4 BHK', group: 'Unfurnished apartment', price: 9999, duration: 'full day' },
+        { label: '4 BHK', group: 'Furnished apartment', price: 10999, duration: 'full day' },
+        { label: '4 BHK', group: 'Unfurnished apartment', price: 8999, duration: 'full day' },
       ],
       included: [
         'Dusting all surfaces & fixtures',
@@ -818,10 +818,10 @@ export const services = {
       duration: 'varies',
       cardBullets: [
         'Pick exactly the rooms you need',
-        '10% off when 3+ rooms selected',
-        'Live price update as you choose',
+        'Ask on WhatsApp for a 3+ room bundle discount',
+        'Price updates as you choose each room',
       ],
-      about: 'Don\'t need a full clean? Tick the rooms you want and the price adds up as you go. 10% off when you pick 3 or more.',
+      about: 'Don\'t need a full clean? Choose the rooms you want and the price adds up as you go. Mention 3 or more rooms on WhatsApp for a bundle discount.',
       priceOptions: [
         { label: 'Living room', price: 1599, duration: '~60 min' },
         { label: 'Bedroom (each)', price: 699, duration: '~50 min' },
@@ -844,9 +844,9 @@ export const services = {
         { label: 'Sofa cleaning (per seat)', price: 499, unit: '/seat', emoji: '🛋️' },
         { label: 'Mattress cleaning', price: 399, unit: '', emoji: '🛏️' },
       ],
-      goodToKnow: ['10% promo applies automatically when 3 or more rooms are selected.'],
+      goodToKnow: ['Booking 3 or more rooms? Mention it on WhatsApp and we will apply a bundle discount.'],
       faqs: [
-        { q: 'How does the 10% discount work?', a: 'Select any 3 or more rooms and the discount applies automatically at checkout.' },
+        { q: 'How does the 3+ room discount work?', a: 'Add the rooms you need, then mention the bundle on WhatsApp and we will confirm the discounted total before the visit.' },
         { q: 'Can I add bathroom and kitchen from the combo deals?', a: 'Yes — mix and match as needed.' },
       ],
     },

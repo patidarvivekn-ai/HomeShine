@@ -1,5 +1,5 @@
 import { useParams, Link, useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { categories, services, globalContent } from '../data/services';
 import { categoryImages } from '../data/images';
 import ServiceCard from '../components/ServiceCard';
@@ -26,6 +26,16 @@ export default function CategoryPage() {
   const categoryServices = services[slug] || [];
   const tabs = [...new Set(categoryServices.map(s => s.tab))];
   const [activeTab, setActiveTab] = useState('');
+
+  useEffect(() => {
+    if (slug) {
+      try {
+        sessionStorage.setItem('hs-last-category', `/services/${slug}`);
+      } catch {
+        // Ignore private-mode failures.
+      }
+    }
+  }, [slug]);
 
   // When switching categories the component instance is reused, so `activeTab`
   // can hold a tab from the previous category. Fall back to the first valid tab.

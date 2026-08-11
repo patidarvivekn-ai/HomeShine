@@ -46,8 +46,7 @@ export function PrivacyPolicy() {
         <h2>Storage and payments</h2>
         <p>
           The current website does not create customer accounts or collect online payment-card
-          details. Cart and booking form information is held in your browser session and may be
-          lost when the page is refreshed.
+          details. Your cart is stored in this browser so a refresh does not wipe the booking.
         </p>
       </section>
       <section>
@@ -87,8 +86,16 @@ export function TermsPage() {
         <h2>Pricing and payment</h2>
         <p>
           Displayed prices are starting prices unless stated otherwise. The final scope and price
-          will be confirmed before work begins. Payment is collected after the service using an
-          agreed payment method.
+          will be confirmed before work begins. Website bookings are paid on-site after the
+          service. Formal written quotations may require an advance to reserve the slot.
+        </p>
+      </section>
+      <section>
+        <h2>Guarantee and damage cover</h2>
+        <p>
+          If you are not satisfied with the confirmed scope, a free re-clean is available within
+          30 days. Accidental damage caused by our team during a booking is covered up to ₹10,000
+          per visit, subject to inspection.
         </p>
       </section>
       <section>
@@ -103,8 +110,8 @@ export function TermsPage() {
         <h2>Service concerns</h2>
         <p>
           If you are not satisfied, contact us promptly with details and photographs where
-          relevant. Eligibility for a re-clean or other resolution depends on the confirmed
-          service scope and inspection of the concern.
+          relevant. A free re-clean within 30 days applies to the confirmed service scope after
+          inspection.
         </p>
       </section>
       <section>

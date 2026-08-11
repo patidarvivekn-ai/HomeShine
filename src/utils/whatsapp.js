@@ -1,5 +1,7 @@
+import { site } from '../data/site';
+
 /** Business WhatsApp number (India, no + or spaces). */
-export const WHATSAPP_BUSINESS_NUMBER = '918000384002';
+export const WHATSAPP_BUSINESS_NUMBER = site.whatsappNumber;
 
 /**
  * Build a wa.me URL with a pre-filled message.

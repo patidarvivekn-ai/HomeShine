@@ -274,7 +274,7 @@ export default function CommercialPage() {
                   name="city"
                   value={form.city}
                   onChange={(v) => setField('city', v)}
-                  placeholder="Mumbai, Pune, Hyderabad…"
+                  placeholder="Ahmedabad, Gandhinagar…"
                 />
 
                 <SelectField

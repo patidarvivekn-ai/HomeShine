@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, LayoutGrid, ShoppingCart, Phone } from 'lucide-react';
+import { Home, LayoutGrid, ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { site } from '../data/site';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 import ServicesMenu from './ServicesMenu';
+import WhatsAppIcon from './WhatsAppIcon';
+
+const WHATSAPP_URL = buildWhatsAppUrl('Hi, I need help with Home Shine cleaning services.');
 
 const tabs = [
-  { to: '/',                     Icon: Home,         label: 'Home',     match: p => p === '/' },
+  { to: '/', Icon: Home, label: 'Home', match: p => p === '/' },
   { Icon: LayoutGrid, label: 'Menu', menu: true, match: p => p.startsWith('/services') },
-  { to: '/cart',                 Icon: ShoppingCart, label: 'Cart',     match: p => p.startsWith('/cart') || p.startsWith('/booking') },
+  { to: '/cart', Icon: ShoppingCart, label: 'Cart', match: p => p.startsWith('/cart') || p.startsWith('/booking') },
 ];
 
 export default function BottomNav() {
@@ -58,11 +63,17 @@ export default function BottomNav() {
             </Link>
           );
         })}
-        <a href="tel:+918000384002" className="bottom-nav__item">
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bottom-nav__item bottom-nav__item--whatsapp"
+          aria-label={`Chat on WhatsApp ${site.phoneDisplay}`}
+        >
           <span className="bottom-nav__icon-wrap">
-            <Phone size={22} strokeWidth={1.8} aria-hidden="true" />
+            <WhatsAppIcon size={20} />
           </span>
-          <span className="bottom-nav__label">Call Us</span>
+          <span className="bottom-nav__label">WhatsApp</span>
         </a>
       </div>
       <ServicesMenu open={menuOpen} onClose={() => setMenuOpen(false)} />

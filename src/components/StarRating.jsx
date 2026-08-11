@@ -1,22 +1,25 @@
-export default function StarRating({ rating, reviews, size = 'sm', dark = false }) {
-  const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
-  const empty = 5 - full - (half ? 1 : 0);
+import { site } from '../data/site';
+
+/**
+ * Decorative stars + a Google reviews link.
+ * Does not publish a numeric score (avoids clashing with live Google ratings).
+ */
+export default function StarRating({ size = 'sm', dark = false }) {
   const textSize = size === 'lg' ? 'text-sm' : 'text-xs';
-  const numColor  = dark ? 'rgba(255,255,255,0.9)' : 'var(--text)';
-  const metaColor = dark ? 'rgba(255,255,255,0.55)' : 'var(--text-muted)';
+  const labelColor = dark ? 'rgba(255,255,255,0.82)' : 'var(--text-muted)';
 
   return (
-    <div className={`flex items-center gap-1 ${textSize}`}>
-      <span style={{ color: 'var(--gold)', letterSpacing: '-1px' }}>
-        {'★'.repeat(full)}
-        {half ? '½' : ''}
-        {'☆'.repeat(empty)}
+    <a
+      href={site.reviewsUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`star-rating-link ${textSize}`}
+      onClick={(event) => event.stopPropagation()}
+    >
+      <span className="star-rating-link__stars" aria-hidden="true">★★★★★</span>
+      <span className="star-rating-link__label" style={{ color: labelColor }}>
+        Google reviews
       </span>
-      <span className="font-bold" style={{ color: numColor, fontFamily: 'var(--font-display)' }}>
-        {rating}
-      </span>
-      <span style={{ color: metaColor }}>({reviews})</span>
-    </div>
+    </a>
   );
 }

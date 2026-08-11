@@ -13,6 +13,10 @@ export default function ServiceCard({ service }) {
   const [added, setAdded] = useState(false);
 
   const photo = serviceImages[service.id] || serviceImages['fabric-sofa'];
+  const pricedOptions = service.priceOptions.filter((option) => option.price > 0);
+  const displayPrice = pricedOptions.length
+    ? Math.min(...pricedOptions.map((option) => option.price))
+    : 0;
   const hasMultipleOptions = service.priceOptions.length > 1;
 
   const openDrawer = (section = 'details') => {
@@ -59,7 +63,7 @@ export default function ServiceCard({ service }) {
             <div className="service-card__overlay" />
             <div className="service-card__price-row">
               <span className="service-card__price">
-                ₹{service.priceOptions[0].price.toLocaleString()}
+                {displayPrice > 0 ? `₹${displayPrice.toLocaleString()}` : 'Quote'}
               </span>
               {service.unit && <span className="service-card__unit">{service.unit}</span>}
             </div>

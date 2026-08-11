@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import StarRating from './StarRating';
 import SmartImage from './SmartImage';
 import { serviceImages } from '../data/images';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 
 const DrawerFAQ = ({ faq }) => {
   const [open, setOpen] = useState(false);
@@ -83,6 +84,7 @@ const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
   );
 
   const handleAddToCart = () => {
+    if (!option.price || option.price <= 0) return;
     const variant = option.group ? `${option.group} · ${option.label}` : option.label;
     addItem({
       cartKey: `${service.id}-${variant}-${selectedAddons.join(',')}`,
@@ -318,16 +320,27 @@ const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
               : [option.group, option.label].filter(Boolean).join(' · ')}
           </span>
           <span className="service-drawer__footer-price">
-            ₹{totalPrice().toLocaleString()}
+            {option.price > 0 ? `₹${totalPrice().toLocaleString()}` : 'On request'}
           </span>
         </div>
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          className={`btn btn-lg btn-block ${addedFeedback ? 'btn-secondary' : 'btn-primary'}`}
-        >
-          {addedFeedback ? '✓ Added to cart!' : 'Add to cart'}
-        </button>
+        {option.price > 0 ? (
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className={`btn btn-lg btn-block ${addedFeedback ? 'btn-secondary' : 'btn-primary'}`}
+          >
+            {addedFeedback ? '✓ Added to cart!' : 'Add to cart'}
+          </button>
+        ) : (
+          <a
+            href={buildWhatsAppUrl(`Hi, I need a quote for ${service.name} — ${option.label}.`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-lg btn-block btn-whatsapp"
+          >
+            Request quote on WhatsApp
+          </a>
+        )}
       </div>
     </div>
   );
@@ -340,10 +353,15 @@ export default function ServiceDetailDrawer({ service, open, initialSection = 'd
     }
 
     document.body.style.overflow = 'hidden';
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKeyDown);
     };
-  }, [open]);
+  }, [open, onClose]);
 
   if (!service || !open) {
     return null;

@@ -1,7 +1,7 @@
 import { globalContent } from '../data/services';
 import SectionHeader from './ui/SectionHeader';
 
-const STEP_EMOJIS = ['📱', '📅', '🧹', '⭐'];
+const STEP_EMOJIS = ['📱', '💬', '🧹', '⭐'];
 
 export default function HowItWorks() {
   const steps = globalContent.howItWorks;

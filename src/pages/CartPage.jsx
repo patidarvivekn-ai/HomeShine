@@ -4,6 +4,14 @@ import { useCart } from '../context/CartContext';
 import OrderSummary from '../components/ui/OrderSummary';
 import Seo from '../components/Seo';
 
+const lastCategoryPath = () => {
+  try {
+    return sessionStorage.getItem('hs-last-category') || '/';
+  } catch {
+    return '/';
+  }
+};
+
 export default function CartPage() {
   const { items, total, updateQty, removeItem } = useCart();
   const navigate = useNavigate();
@@ -131,7 +139,7 @@ export default function CartPage() {
               >
                 Book now <ArrowRight size={16} aria-hidden="true" />
               </button>
-              <Link to="/" className="order-summary__link link-accent">
+              <Link to={lastCategoryPath()} className="order-summary__link link-accent">
                 + Add more services
               </Link>
             </OrderSummary>
