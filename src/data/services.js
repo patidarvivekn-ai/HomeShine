@@ -65,9 +65,9 @@ export const categories = [
     emoji: '🏢',
     rating: 4.86,
     reviews: 'For business',
-    intro: 'Professional cleaning for offices, retail, clinics and restaurants — one-time deep cleans or recurring daily/weekly housekeeping.',
+    intro: 'Professional cleaning for offices, warehouses, cinema halls, party plots, retail, clinics and restaurants — one-time deep cleans or recurring housekeeping.',
     color: 'from-orange-500 to-amber-600',
-    tabs: ['Office deep cleaning', 'Office chair cleaning', 'Floor & carpet', 'Restroom', 'Post-construction', 'Recurring contracts'],
+    tabs: ['Office deep cleaning', 'Office chair cleaning', 'Warehouse cleaning', 'Cinema hall', 'Party plot sofa & chair', 'Floor & carpet', 'Restroom', 'Post-construction', 'Recurring contracts'],
   },
 ];
 
@@ -862,6 +862,9 @@ export const commercialServices = [
   { name: 'Pantry / cafeteria cleaning', desc: 'Kitchenette, dining, appliance exteriors, floors', emoji: '🍽️' },
   { name: 'Glass & facade cleaning', desc: 'Interior glass, partitions; exterior facade (height-access)', emoji: '🪟' },
   { name: 'Post-construction / fit-out', desc: 'Dust, debris, paint & adhesive removal after build-out', emoji: '🔨' },
+  { name: 'Warehouse & godown cleaning', desc: 'Floors, racks, loading bays and storage areas — dust, debris and machine scrub. Quoted after site visit.', emoji: '📦' },
+  { name: 'Cinema hall & multiplex cleaning', desc: 'Auditorium seats, aisles, lobby, washrooms and floors — deep clean before or after shows. Quoted after site visit.', emoji: '🎬' },
+  { name: 'Party plot sofa & chair cleaning', desc: 'Banquet and party-plot sofas, banquet chairs and guest seating — shampoo, vacuum and sanitise. Quoted per piece after count.', emoji: '🎉' },
   { name: 'Sanitization & disinfection', desc: 'Full-premises fogging & surface disinfection', emoji: '🦠' },
   { name: 'Recurring housekeeping contract', desc: 'Daily / weekly / monthly staffed cleaning', emoji: '📅' },
 ];
@@ -875,6 +878,9 @@ export const commercialBenefits = [
 ];
 
 export const commercialFaqs = [
+  { q: 'Do you clean cinema halls?', a: 'Yes — auditorium seats, aisles, lobby, washrooms and floors. We can schedule around show timings after a site visit.' },
+  { q: 'Do you clean party-plot sofas and chairs?', a: 'Yes — banquet sofas, banquet chairs and guest seating. Share an approximate sofa and chair count for a quote.' },
+  { q: 'Do you clean warehouses and godowns?', a: 'Yes — floors, racks, loading bays and storage areas. Share the approx. area and we will quote after a site visit.' },
   { q: 'Do you clean office chairs?', a: 'Yes — mesh, fabric and leather workstation, visitor and executive chairs. We vacuum, shampoo and sanitise. Share an approximate chair count for a quote.' },
   { q: 'Do you clean after office hours?', a: 'Yes — we schedule around your working hours, including nights and weekends.' },
   { q: 'Do you provide GST invoices?', a: 'Yes, for all commercial bookings.' },

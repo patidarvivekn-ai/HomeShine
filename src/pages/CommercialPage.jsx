@@ -14,7 +14,9 @@ import SectionHeader from '../components/ui/SectionHeader';
 import StarRating from '../components/StarRating';
 import SmartImage from '../components/SmartImage';
 import Seo from '../components/Seo';
+import WhatsAppIcon from '../components/WhatsAppIcon';
 import { TextField, SelectField, TextAreaField } from '../components/ui/Field';
+import { site } from '../data/site';
 import {
   buildCommercialQuoteWhatsAppMessage,
   buildWhatsAppUrl,
@@ -30,14 +32,21 @@ import {
   UtensilsCrossed,
   PanelTop,
   Hammer,
+  Warehouse,
+  Clapperboard,
+  PartyPopper,
   ShieldCheck,
   Calendar,
   CheckCircle,
   CircleCheck,
   MessageCircle,
+  Phone,
 } from 'lucide-react';
 
-const PROPERTY_TYPES = ['Office', 'Retail', 'Clinic', 'Restaurant', 'Educational institute', 'Other'];
+const PROPERTY_TYPES = ['Office', 'Warehouse / godown', 'Cinema hall / multiplex', 'Party plot / banquet', 'Retail', 'Clinic', 'Restaurant', 'Educational institute', 'Other'];
+const COMMERCIAL_WHATSAPP = buildWhatsAppUrl(
+  'Hi, I need a commercial / office cleaning quote from Home Shine.',
+);
 const FREQUENCIES = ['One-time', 'Weekly', 'Monthly'];
 
 const SERVICE_ICONS = [
@@ -49,6 +58,9 @@ const SERVICE_ICONS = [
   UtensilsCrossed,
   PanelTop,
   Hammer,
+  Warehouse,
+  Clapperboard,
+  PartyPopper,
   ShieldCheck,
   Calendar,
 ];
@@ -150,15 +162,48 @@ export default function CommercialPage() {
               />
             )}
             <p className="commercial-hero__intro">
-              Professional cleaning for offices, retail, clinics and restaurants — one-time deep cleans
+              Professional cleaning for offices, warehouses, cinema halls, party plots, retail, clinics and restaurants — one-time deep cleans
               or recurring daily/weekly housekeeping. Custom pricing to your space.
             </p>
+            <div className="commercial-hero__actions">
+              <a
+                href={COMMERCIAL_WHATSAPP}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-whatsapp"
+              >
+                <WhatsAppIcon size={16} /> WhatsApp us
+              </a>
+              <a href={`tel:${site.phoneInternational}`} className="btn btn-dark">
+                <Phone size={16} /> {site.phoneDisplay}
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="container commercial-page__main">
         <CategoryNav activeSlug="commercial" />
+
+        <div className="commercial-contact">
+          <div>
+            <p className="commercial-contact__title">Need a quote? There is no cart for commercial jobs.</p>
+            <p className="commercial-contact__sub">Message or call us directly — we reply with a site-visit quote.</p>
+          </div>
+          <div className="commercial-contact__actions">
+            <a
+              href={COMMERCIAL_WHATSAPP}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-whatsapp"
+            >
+              <WhatsAppIcon size={16} /> WhatsApp
+            </a>
+            <a href={`tel:${site.phoneInternational}`} className="btn btn-secondary">
+              <Phone size={16} /> Call {site.phoneDisplay}
+            </a>
+          </div>
+        </div>
 
         <div className="commercial-page__grid">
           <div>
@@ -172,10 +217,18 @@ export default function CommercialPage() {
                     <span className="commercial-services__icon" aria-hidden="true">
                       <Icon size={18} />
                     </span>
-                    <div>
+                    <div className="commercial-services__copy">
                       <div className="commercial-services__name">{svc.name}</div>
                       <div className="commercial-services__desc">{svc.desc}</div>
                     </div>
+                    <a
+                      href={buildWhatsAppUrl(`Hi, I need a quote for ${svc.name} from Home Shine.`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="commercial-services__enquire"
+                    >
+                      <WhatsAppIcon size={14} /> Enquire
+                    </a>
                   </div>
                 );
               })}

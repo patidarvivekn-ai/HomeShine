@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import { X, Clock, CheckCircle, XCircle, Plus, Minus, ChevronDown } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import StarRating from './StarRating';
 import SmartImage from './SmartImage';
+import QtyStepper from './ui/QtyStepper';
 import { serviceImages } from '../data/images';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 
@@ -40,11 +42,17 @@ const DrawerSectionLabel = ({ children }) => (
   <p className="service-drawer__label">{children}</p>
 );
 
+const optionVariant = (opt) => (opt.group ? `${opt.group} · ${opt.label}` : opt.label);
+
+const optionCartKey = (serviceId, opt, addons = []) => (
+  `${serviceId}-${optionVariant(opt)}-${addons.join(',')}`
+);
+
 const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
-  const { addItem } = useCart();
+  const { addItem, updateQty, qtyFor, qtyForVariant, count } = useCart();
   const [selectedOption, setSelectedOption] = useState(0);
   const [selectedAddons, setSelectedAddons] = useState([]);
-  const [addedFeedback, setAddedFeedback] = useState(false);
+  const [justAdded, setJustAdded] = useState(false);
   const scrollRef = useRef(null);
   const optionsRef = useRef(null);
 
@@ -55,6 +63,8 @@ const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
   const visibleOptions = service.priceOptions
     .map((item, index) => ({ item, index }))
     .filter(({ item }) => !optionGroups.length || item.group === selectedGroup);
+  const currentCartKey = optionCartKey(service.id, option, selectedAddons);
+  const currentQty = qtyFor(currentCartKey);
 
   useEffect(() => {
     if (initialSection !== 'options') {
@@ -85,20 +95,16 @@ const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
 
   const handleAddToCart = () => {
     if (!option.price || option.price <= 0) return;
-    const variant = option.group ? `${option.group} · ${option.label}` : option.label;
     addItem({
-      cartKey: `${service.id}-${variant}-${selectedAddons.join(',')}`,
+      cartKey: currentCartKey,
       serviceId: service.id,
       name: service.name,
-      variant,
+      variant: optionVariant(option),
       addons: service.addons.filter((a) => selectedAddons.includes(a.label)),
       price: totalPrice(),
     });
-    setAddedFeedback(true);
-    setTimeout(() => {
-      setAddedFeedback(false);
-      onClose();
-    }, 900);
+    setJustAdded(true);
+    window.setTimeout(() => setJustAdded(false), 1200);
   };
 
   return (
@@ -179,12 +185,13 @@ const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
             <div className="service-drawer__options">
               {visibleOptions.map(({ item: opt, index }) => {
                 const isSelected = selectedOption === index;
+                const inCartQty = qtyForVariant(service.id, optionVariant(opt));
                 return (
                   <button
                     key={`${opt.group || ''}-${opt.label}`}
                     type="button"
                     onClick={() => setSelectedOption(index)}
-                    className={`service-drawer__option ${isSelected ? 'is-selected' : ''}`}
+                    className={`service-drawer__option ${isSelected ? 'is-selected' : ''} ${inCartQty > 0 ? 'is-in-cart' : ''}`}
                   >
                     <div>
                       <div className="service-drawer__option-name">{opt.label}</div>
@@ -195,10 +202,15 @@ const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
                         <Clock size={10} aria-hidden="true" /> {opt.duration}
                       </div>
                     </div>
-                    <span
-                      className={`service-drawer__option-price ${opt.price > 0 ? '' : 'is-muted'}`}
-                    >
-                      {opt.price > 0 ? `₹${opt.price.toLocaleString()}` : opt.note || '—'}
+                    <span className="service-drawer__option-right">
+                      {inCartQty > 0 && (
+                        <span className="service-drawer__option-qty">×{inCartQty}</span>
+                      )}
+                      <span
+                        className={`service-drawer__option-price ${opt.price > 0 ? '' : 'is-muted'}`}
+                      >
+                        {opt.price > 0 ? `₹${opt.price.toLocaleString()}` : opt.note || '—'}
+                      </span>
                     </span>
                   </button>
                 );
@@ -324,13 +336,34 @@ const ServiceDrawerPanel = ({ service, initialSection, onClose }) => {
           </span>
         </div>
         {option.price > 0 ? (
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            className={`btn btn-lg btn-block ${addedFeedback ? 'btn-secondary' : 'btn-primary'}`}
-          >
-            {addedFeedback ? '✓ Added to cart!' : 'Add to cart'}
-          </button>
+          <div className="service-drawer__footer-actions">
+            {currentQty > 0 ? (
+              <>
+                <QtyStepper
+                  qty={currentQty}
+                  label={option.label}
+                  onDecrease={() => updateQty(currentCartKey, currentQty - 1)}
+                  onIncrease={handleAddToCart}
+                />
+                <p className="service-drawer__keep-adding">
+                  {justAdded ? 'Added. Pick another option or change qty.' : 'In cart — add another option above if needed.'}
+                </p>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="btn btn-lg btn-block btn-primary"
+              >
+                Add to cart
+              </button>
+            )}
+            {count > 0 && (
+              <Link to="/cart" className="service-drawer__cart-link" onClick={onClose}>
+                View cart ({count})
+              </Link>
+            )}
+          </div>
         ) : (
           <a
             href={buildWhatsAppUrl(`Hi, I need a quote for ${service.name} — ${option.label}.`)}

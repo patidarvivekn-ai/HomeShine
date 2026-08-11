@@ -77,9 +77,27 @@ export function CartProvider({ children }) {
 
   const total = state.items.reduce((sum, i) => sum + i.price * i.qty, 0);
   const count = state.items.reduce((sum, i) => sum + i.qty, 0);
+  const qtyFor = (cartKey) => state.items.find((item) => item.cartKey === cartKey)?.qty || 0;
+  const qtyForService = (serviceId) => state.items
+    .filter((item) => item.serviceId === serviceId)
+    .reduce((sum, item) => sum + item.qty, 0);
+  const qtyForVariant = (serviceId, variant) => state.items
+    .filter((item) => item.serviceId === serviceId && item.variant === variant)
+    .reduce((sum, item) => sum + item.qty, 0);
 
   return (
-    <CartContext.Provider value={{ items: state.items, total, count, addItem, removeItem, updateQty, clearCart }}>
+    <CartContext.Provider value={{
+      items: state.items,
+      total,
+      count,
+      addItem,
+      removeItem,
+      updateQty,
+      clearCart,
+      qtyFor,
+      qtyForService,
+      qtyForVariant,
+    }}>
       {children}
     </CartContext.Provider>
   );

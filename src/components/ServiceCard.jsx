@@ -4,13 +4,17 @@ import { useCart } from '../context/CartContext';
 import StarRating from './StarRating';
 import ServiceDetailDrawer from './ServiceDetailDrawer';
 import SmartImage from './SmartImage';
+import QtyStepper from './ui/QtyStepper';
 import { serviceImages } from '../data/images';
 
+function singleOptionCartKey(service) {
+  return `${service.id}-${service.priceOptions[0].label}`;
+}
+
 export default function ServiceCard({ service }) {
-  const { addItem } = useCart();
+  const { addItem, updateQty, qtyFor, qtyForService } = useCart();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerSection, setDrawerSection] = useState('details');
-  const [added, setAdded] = useState(false);
 
   const photo = serviceImages[service.id] || serviceImages['fabric-sofa'];
   const pricedOptions = service.priceOptions.filter((option) => option.price > 0);
@@ -18,6 +22,8 @@ export default function ServiceCard({ service }) {
     ? Math.min(...pricedOptions.map((option) => option.price))
     : 0;
   const hasMultipleOptions = service.priceOptions.length > 1;
+  const cartKey = !hasMultipleOptions ? singleOptionCartKey(service) : '';
+  const qty = hasMultipleOptions ? qtyForService(service.id) : qtyFor(cartKey);
 
   const openDrawer = (section = 'details') => {
     setDrawerSection(section);
@@ -32,19 +38,17 @@ export default function ServiceCard({ service }) {
     }
 
     addItem({
-      cartKey: `${service.id}-${service.priceOptions[0].label}`,
+      cartKey,
       serviceId: service.id,
       name: service.name,
       variant: service.priceOptions[0].label,
       price: service.priceOptions[0].price,
     });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1500);
   };
 
   return (
     <>
-      <article className="service-card card">
+      <article className={`service-card card ${qty > 0 ? 'is-in-cart' : ''}`}>
         <button
           type="button"
           onClick={() => openDrawer('options')}
@@ -70,7 +74,10 @@ export default function ServiceCard({ service }) {
             <div className="service-card__duration">
               <Clock size={11} aria-hidden="true" /> {service.duration}
             </div>
-            {hasMultipleOptions && (
+            {qty > 0 && (
+              <span className="service-card__cart-qty">{qty} in cart</span>
+            )}
+            {hasMultipleOptions && qty === 0 && (
               <span className="service-card__option-count">
                 {service.priceOptions.length} options
               </span>
@@ -101,15 +108,25 @@ export default function ServiceCard({ service }) {
             <button type="button" onClick={() => openDrawer('details')} className="btn btn-secondary btn-sm flex-1">
               Details
             </button>
-            <button
-              type="button"
-              onClick={handleQuickAdd}
-              className={`btn btn-sm flex-1 ${added ? 'btn-secondary is-added' : 'btn-primary'}`}
-            >
-              {added
-                ? <><Check size={15} /> Added</>
-                : <><Plus size={15} /> {hasMultipleOptions ? 'Select' : 'Add'}</>}
-            </button>
+            {!hasMultipleOptions && qty > 0 ? (
+              <QtyStepper
+                qty={qty}
+                size="sm"
+                label={service.name}
+                onDecrease={() => updateQty(cartKey, qty - 1)}
+                onIncrease={handleQuickAdd}
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={handleQuickAdd}
+                className={`btn btn-sm flex-1 ${qty > 0 ? 'btn-secondary' : 'btn-primary'}`}
+              >
+                {qty > 0
+                  ? <><Check size={15} /> {qty} in cart</>
+                  : <><Plus size={15} /> {hasMultipleOptions ? 'Select' : 'Add'}</>}
+              </button>
+            )}
           </div>
         </div>
       </article>
