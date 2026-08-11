@@ -54,7 +54,7 @@ export const PACKAGE_PRESETS = {
     id: 'Villa/Bungalow',
     label: 'Villa/Bungalow',
     name: 'Villa / Bungalow Package',
-    area: '1500+ sq\u00A0ft',
+    area: 'Site visit',
     staff: 6,
     hours: '12+ Hours',
     rooms: { living: 2, bed: 4, kitchen: 2, bath: 4, balcony: 3 },
@@ -63,11 +63,11 @@ export const PACKAGE_PRESETS = {
 };
 
 export const DEFAULT_PRICE_ROWS = [
-  { id: '1BHK', rate: 2999, disc: 200 },
-  { id: '2BHK', rate: 4499, disc: 300 },
-  { id: '3BHK', rate: 6499, disc: 500 },
-  { id: '4BHK', rate: 8499, disc: 700 },
-  { id: 'Villa/Bungalow', rate: 11999, disc: 1000 },
+  { id: '1BHK', rate: 3499, disc: 200 },
+  { id: '2BHK', rate: 5999, disc: 300 },
+  { id: '3BHK', rate: 6999, disc: 500 },
+  { id: '4BHK', rate: 10999, disc: 700 },
+  { id: 'Villa/Bungalow', rate: 0, disc: 0 },
 ];
 
 export const DEFAULT_PACKAGE_ID = '2BHK';

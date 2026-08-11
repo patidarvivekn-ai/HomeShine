@@ -80,7 +80,7 @@ export const services = {
       name: 'Fabric Sofa Cleaning',
       rating: 4.85,
       reviews: 520,
-      startsAt: 499,
+      startsAt: 150,
       unit: '/seat',
       duration: '~40 mins/seat',
       cardBullets: [
@@ -90,10 +90,11 @@ export const services = {
       ],
       about: 'Daily use traps crumbs, dust, sweat and pet hair deep in sofa fabric, causing odour and dullness. Our deep shampoo + extraction restores the look and removes germs and allergens.',
       priceOptions: [
-        { label: 'Per seat', price: 499, duration: '~40 mins/seat' },
-        { label: '3-seater sofa', price: 1399, duration: '~2 hrs' },
-        { label: '5-seater (3+2)', price: 2199, duration: '~3 hrs' },
-        { label: 'L-shape (per seat)', price: 499, duration: 'varies' },
+        { label: 'Per seat', price: 150, duration: '~40 mins/seat' },
+        { label: '3-seater sofa', price: 499, duration: '~2 hrs' },
+        { label: '5-seater (3+2)', price: 749, duration: '~3 hrs' },
+        { label: '6-seater', price: 899, duration: '~3.5 hrs' },
+        { label: '7-seater', price: 999, duration: '~4 hrs' },
       ],
       included: [
         'Dry vacuuming of seats, back, arms and gaps',
@@ -116,10 +117,9 @@ export const services = {
         'Mechanised drying (3–4 hrs to fully dry before use)',
       ],
       addons: [
-        { label: 'Fabric stain-guard coating', price: 299, unit: '/seat', emoji: '🛡' },
         { label: 'Deep deodorizing / odour treatment', price: 199, unit: '', emoji: '🌬' },
-        { label: 'Heavy pet-hair removal', price: 149, unit: '/seat', emoji: '🐾' },
-        { label: 'Anti-microbial sanitisation', price: 249, unit: '', emoji: '🦠' },
+        { label: 'Heavy pet-hair removal', price: 199, unit: '/seat', emoji: '🐾' },
+        { label: 'Anti-microbial sanitisation', price: 199, unit: '', emoji: '🦠' },
       ],
       goodToKnow: [
         'Sofa stays damp ~3–4 hrs; keep it ventilated and don\'t sit until dry.',
@@ -139,7 +139,7 @@ export const services = {
       name: 'Leather / Rexine Sofa Cleaning',
       rating: 4.82,
       reviews: 210,
-      startsAt: 599,
+      startsAt: 150,
       unit: '/seat',
       duration: '~45 mins/seat',
       cardBullets: [
@@ -149,9 +149,9 @@ export const services = {
       ],
       about: 'Leather needs special care — too much water damages it. We use minimal moisture, leather-safe cleaner and a conditioning polish to keep it soft and crack-free.',
       priceOptions: [
-        { label: 'Per seat', price: 599, duration: '~45 mins/seat' },
-        { label: '3-seater', price: 1699, duration: '~2 hrs' },
-        { label: '5-seater (3+2)', price: 2599, duration: '~3 hrs' },
+        { label: 'Per seat', price: 150, duration: '~45 mins/seat' },
+        { label: '3-seater', price: 499, duration: '~2 hrs' },
+        { label: '5-seater (3+2)', price: 749, duration: '~3 hrs' },
       ],
       included: [
         'Dry dusting and gentle vacuuming',
@@ -200,8 +200,8 @@ export const services = {
       about: 'Recliners collect dust in their folds and mechanism. We clean the seat, back, footrest and the gaps around the reclining frame.',
       priceOptions: [
         { label: 'Fabric recliner', price: 249, duration: '~25 mins' },
-        { label: 'Leather recliner', price: 349, duration: '~30 mins' },
-        { label: 'Per additional recliner', price: 199, duration: '~20 mins' },
+        { label: 'Leather recliner', price: 449, duration: '~30 mins' },
+        { label: 'Per additional recliner', price: 599, duration: '~20 mins' },
       ],
       included: [
         'Dry & wet vacuuming of all surfaces',
@@ -231,7 +231,7 @@ export const services = {
       name: 'Sofa-cum-bed Cleaning',
       rating: 4.83,
       reviews: 180,
-      startsAt: 699,
+      startsAt: 499,
       unit: '',
       duration: '~50 mins',
       cardBullets: [
@@ -241,7 +241,7 @@ export const services = {
       ],
       about: 'A sofa-cum-bed has a mattress section that traps more dust than a normal sofa. We clean it open and closed for a full deep clean.',
       priceOptions: [
-        { label: 'Sofa-cum-bed (standard)', price: 699, duration: '~50 mins' },
+        { label: 'Sofa-cum-bed (standard)', price: 499, duration: '~50 mins' },
       ],
       included: [
         'Vacuuming in sofa position',
@@ -307,7 +307,7 @@ export const services = {
       name: 'Carpet & Rug Cleaning',
       rating: 4.79,
       reviews: '99K',
-      startsAt: 399,
+      startsAt: 499,
       unit: '',
       duration: '~50 mins',
       cardBullets: [
@@ -317,9 +317,9 @@ export const services = {
       ],
       about: 'Carpets trap dust, allergens and stains that regular vacuuming can\'t reach. Our wet shampoo + extraction method delivers a deep clean with fast drying.',
       priceOptions: [
-        { label: 'Small rug (up to 20 sq ft)', price: 399, duration: '~50 mins' },
+        { label: 'Small rug (up to 20 sq ft)', price: 499, duration: '~50 mins' },
         { label: 'Medium carpet (20–60 sq ft)', price: 899, duration: '~90 mins' },
-        { label: 'Large carpet (per sq ft)', price: 18, duration: 'varies' },
+        { label: 'Large carpet Above 500 (per sq ft)', price: 10, duration: 'varies' },
         { label: 'Shaggy / high-pile surcharge', price: 0, note: '+20%', duration: 'varies' },
       ],
       included: [
@@ -417,8 +417,8 @@ export const services = {
       about: 'Mattresses are home to millions of dust mites, dead skin cells and allergens. Our deep clean extracts all of that and sanitises for a healthier sleep.',
       priceOptions: [
         { label: 'Single', price: 399, duration: '~45 mins' },
-        { label: 'Double / Queen', price: 599, duration: '~60 mins' },
-        { label: 'King', price: 699, duration: '~75 mins' },
+        { label: 'Double / Queen', price: 699, duration: '~60 mins' },
+        { label: 'King', price: 799, duration: '~75 mins' },
       ],
       included: [
         'Both-side dry vacuum',
@@ -471,7 +471,7 @@ export const services = {
       about: 'Quick add-on cleaning for individual furniture pieces. Pick exactly what you need.',
       priceOptions: [
         { label: 'Ottoman / pouffe', price: 99, duration: '~15 min' },
-        { label: 'Office / study chair', price: 149, duration: '~20 min' },
+        { label: 'Office / study chair', price: 99, duration: '~20 min' },
         { label: 'Bar stool (fabric)', price: 99, duration: '~15 min' },
         { label: 'Curtains (per panel)', price: 129, duration: 'varies' },
         { label: 'Cushions (set of 4)', price: 199, duration: '~20 min' },
@@ -501,7 +501,7 @@ export const services = {
       name: 'Bathroom + Kitchen Combo',
       rating: 4.80,
       reviews: '2,100',
-      startsAt: 999,
+      startsAt: 499,
       unit: '',
       duration: '~2.5 hrs',
       cardBullets: [
@@ -511,9 +511,9 @@ export const services = {
       ],
       about: 'Bundle your most-used rooms and save versus booking separately. Best value for a pre-festival or move-in refresh.',
       priceOptions: [
-        { label: '1 Bathroom + 1 Kitchen (classic)', price: 999, duration: '~2.5 hrs', note: 'Save ~15%' },
-        { label: '2 Bathrooms + 1 Kitchen', price: 1499, duration: '~3.5 hrs', note: 'Save ~18%' },
-        { label: 'Full bathroom + kitchen + 1 appliance', price: 1799, duration: '~4 hrs', note: 'Save ~20%' },
+        { label: '1 Bathroom + 1 Kitchen (classic)', price: 499, duration: '~2.5 hrs', note: 'Save ~15%' },
+        { label: '2 Bathrooms + 1 Kitchen', price: 949, duration: '~3.5 hrs', note: 'Save ~18%' },
+        { label: 'Full bathroom + kitchen + 1 appliance', price: 549, duration: '~4 hrs', note: 'Save ~20%' },
       ],
       included: [
         'Full bathroom deep clean (Intense level)',
@@ -524,7 +524,7 @@ export const services = {
       process: ['Start with bathroom', 'Move to kitchen', 'Final walkthrough with you'],
       addons: [
         { label: 'Upgrade kitchen to Premium', price: 500, unit: '', emoji: '⬆️' },
-        { label: 'Add chimney internal deep-clean', price: 399, unit: '', emoji: '🔧' },
+        { label: 'Add chimney internal deep-clean', price: 599, unit: '', emoji: '🔧' },
       ],
       goodToKnow: ['For inside-cabinet service, please empty cabinets beforehand.'],
       faqs: [
@@ -548,7 +548,7 @@ export const services = {
       about: 'Descaling, disinfecting and scrubbing every surface from tile grout to toilet bowl — leaving your bathroom hygienic and sparkling.',
       priceOptions: [
         { label: 'Classic', price: 449, duration: '~45 min', note: 'For regular maintenance' },
-        { label: 'Intense', price: 649, duration: '~75 min', note: 'Heavy build-up, limescale, grout' },
+        { label: 'Intense', price: 599, duration: '~75 min', note: 'Heavy build-up, limescale, grout' },
       ],
       included: [
         'Toilet sanitising (inside + out)',
@@ -568,7 +568,7 @@ export const services = {
         '[Intense] Exhaust fan + glass partition',
       ],
       addons: [
-        { label: 'Glass shower-screen descaling', price: 149, unit: '', emoji: '✨' },
+        { label: 'Glass shower-screen descaling', price: 649, unit: '', emoji: '✨' },
         { label: 'Drain de-clog (light)', price: 99, unit: '', emoji: '🔧' },
       ],
       goodToKnow: ['Hard-water stains lighten significantly with Intense; very old staining may remain.'],
@@ -583,7 +583,7 @@ export const services = {
       name: 'Kitchen Deep Cleaning',
       rating: 4.79,
       reviews: '3,200',
-      startsAt: 699,
+      startsAt: 1399,
       unit: '',
       duration: '~90 mins',
       cardBullets: [
@@ -593,8 +593,8 @@ export const services = {
       ],
       about: 'Kitchen grease, grime and hard water build up fast. Our professional degreasing cuts through months of residue on every surface.',
       priceOptions: [
-        { label: 'Classic', price: 699, duration: '~90 min', note: 'Regular maintenance' },
-        { label: 'Premium', price: 1199, duration: '~150 min', note: 'Chimney exterior, inside cabinets, full tile degrease' },
+        { label: 'Classic', price: 1399, duration: '~90 min', note: 'Regular maintenance' },
+        { label: 'Premium', price: 2099, duration: '~150 min', note: 'Chimney exterior, inside cabinets, full tile degrease' },
       ],
       included: [
         'Countertop & sink degreasing',
@@ -615,7 +615,7 @@ export const services = {
         '[Premium] Chimney + inside cabinets',
       ],
       addons: [
-        { label: 'Chimney internal deep-clean', price: 399, unit: '', emoji: '🔧' },
+        { label: 'Chimney internal deep-clean', price: 599, unit: '', emoji: '🔧' },
         { label: 'Inside-cabinet full service', price: 299, unit: '', emoji: '🗄️' },
       ],
       goodToKnow: ['For inside-cabinet service, please empty cabinets beforehand.'],
@@ -630,7 +630,7 @@ export const services = {
       name: 'Mini Fixture Services',
       rating: 4.78,
       reviews: '1,400',
-      startsAt: 149,
+      startsAt: 99,
       unit: '',
       duration: '~15–25 mins',
       cardBullets: [
@@ -640,8 +640,8 @@ export const services = {
       ],
       about: 'Need just one fixture sorted? Pick and choose individual items for a quick, targeted clean.',
       priceOptions: [
-        { label: 'One toilet deep clean', price: 199, duration: '~20 min' },
-        { label: 'One washbasin + tap descale', price: 149, duration: '~15 min' },
+        { label: 'One toilet deep clean', price: 299, duration: '~20 min' },
+        { label: 'One washbasin + tap descale', price: 99, duration: '~15 min' },
         { label: 'One exhaust fan', price: 149, duration: '~15 min' },
         { label: 'One tile wall scrub (per wall)', price: 199, duration: '~25 min' },
         { label: 'Single window + grille', price: 179, duration: '~20 min' },
@@ -661,7 +661,7 @@ export const services = {
       name: 'Appliance Deep Cleaning',
       rating: 4.82,
       reviews: '2,900',
-      startsAt: 249,
+      startsAt: 99,
       unit: '',
       duration: '~30–60 mins',
       cardBullets: [
@@ -671,11 +671,12 @@ export const services = {
       ],
       about: 'Appliances accumulate grease, limescale and bacteria inside. Our specialist cleaning extends lifespan and keeps food safe.',
       priceOptions: [
-        { label: 'Refrigerator (inside + out)', price: 399, duration: '~45 min' },
-        { label: 'Microwave / OTG', price: 249, duration: '~30 min' },
-        { label: 'Chimney (filter deep-clean)', price: 499, duration: '~60 min' },
+        { label: 'Single Door Fridge Cleaning', price: 399, duration: '~45 min' },
+        { label: 'Double Door Fridge Cleaning', price: 549, duration: '~55 min' },
+        { label: 'Microwave / OTG', price: 199, duration: '~30 min' },
+        { label: 'Chimney (filter deep-clean)', price: 599, duration: '~60 min' },
         { label: 'Washing machine (drum clean)', price: 449, duration: '~45 min' },
-        { label: 'Gas hob / stove', price: 249, duration: '~30 min' },
+        { label: 'Gas hob / stove', price: 99, duration: '~30 min' },
       ],
       included: [
         'Refrigerator: shelves, trays, coils exterior, sanitise',
@@ -710,7 +711,7 @@ export const services = {
       name: '1 BHK Full Apartment Deep Cleaning',
       rating: 4.82,
       reviews: '1,200',
-      startsAt: 3999,
+      startsAt: 2999,
       unit: '',
       duration: '3–4 hrs',
       cardBullets: [
@@ -724,10 +725,10 @@ export const services = {
         { label: '1 BHK', group: 'Unfurnished apartment', price: 2999, duration: '3–4 hrs' },
         { label: '2 BHK', group: 'Furnished apartment', price: 5999, duration: '5–6 hrs' },
         { label: '2 BHK', group: 'Unfurnished apartment', price: 4499, duration: '5–6 hrs' },
-        { label: '3 BHK', group: 'Furnished apartment', price: 5299, duration: '7–8 hrs' },
-        { label: '3 BHK', group: 'Unfurnished apartment', price: 6199, duration: '7–8 hrs' },
-        { label: '4 BHK', group: 'Furnished apartment', price: 6999, duration: 'full day' },
-        { label: '4 BHK', group: 'Unfurnished apartment', price: 7999, duration: 'full day' },
+        { label: '3 BHK', group: 'Furnished apartment', price: 6999, duration: '7–8 hrs' },
+        { label: '3 BHK', group: 'Unfurnished apartment', price: 5449, duration: '7–8 hrs' },
+        { label: '4 BHK', group: 'Furnished apartment', price: 9000, duration: 'full day' },
+        { label: '4 BHK', group: 'Unfurnished apartment', price: 9999, duration: 'full day' },
       ],
       included: [
         'Dusting all surfaces & fixtures',
@@ -747,7 +748,7 @@ export const services = {
         'Final sweep and walkthrough',
       ],
       addons: [
-        { label: 'Sofa cleaning (per seat)', price: 499, unit: '/seat', emoji: '🛋️' },
+        { label: 'Sofa cleaning (per seat)', price: 149, unit: '/seat', emoji: '🛋️' },
         { label: 'Mattress cleaning', price: 399, unit: '', emoji: '🛏️' },
         { label: 'Chimney internal', price: 499, unit: '', emoji: '🔧' },
         { label: 'Balcony pressure-wash', price: 399, unit: '', emoji: '💧' },
@@ -767,7 +768,7 @@ export const services = {
       name: 'Full Bungalow / Duplex Cleaning',
       rating: 4.81,
       reviews: '340',
-      startsAt: 4999,
+      startsAt: 12999,
       unit: '',
       duration: 'Full day',
       cardBullets: [
@@ -777,9 +778,9 @@ export const services = {
       ],
       about: 'Same room-by-room deep clean as apartments, scaled for independent houses including staircases and multiple floors. Larger homes get a multi-person team.',
       priceOptions: [
-        { label: 'Up to 1,500 sq ft (2 floors)', price: 4999, duration: 'Full day' },
-        { label: '1,500–2,500 sq ft', price: 7499, duration: 'Full day, 2 pros' },
-        { label: '2,500+ sq ft', price: 0, note: 'Custom quote', duration: 'Multi-day possible' },
+        { label: 'Up to 1,500 sq ft (2 floors)', price: 12999, duration: 'Full day' },
+        { label: '1,500–2,500 sq ft', price: 21000, duration: 'Full day, 2 pros' },
+        { label: '2,500+ sq ft', price: 0, note: 'Site visit', duration: 'Multi-day possible' },
       ],
       included: [
         'All rooms — dust, scrub, mop, polish',
@@ -796,7 +797,7 @@ export const services = {
         'Final walkthrough',
       ],
       addons: [
-        { label: 'Sofa cleaning (per seat)', price: 499, unit: '/seat', emoji: '🛋️' },
+        { label: 'Sofa cleaning (per seat)', price: 149, unit: '/seat', emoji: '🛋️' },
         { label: 'All mattresses', price: 499, unit: '/mattress', emoji: '🛏️' },
         { label: 'Carpet cleaning', price: 899, unit: '', emoji: '🧺' },
       ],
@@ -822,7 +823,7 @@ export const services = {
       ],
       about: 'Don\'t need a full clean? Tick the rooms you want and the price adds up as you go. 10% off when you pick 3 or more.',
       priceOptions: [
-        { label: 'Living room', price: 899, duration: '~60 min' },
+        { label: 'Living room', price: 1599, duration: '~60 min' },
         { label: 'Bedroom (each)', price: 699, duration: '~50 min' },
         { label: 'Kitchen (deep)', price: 1199, duration: '~90 min' },
         { label: 'Bathroom (each)', price: 649, duration: '~60 min' },
@@ -853,7 +854,7 @@ export const services = {
 };
 
 export const commercialServices = [
-  { name: 'Office deep cleaning', desc: 'Workstations, cabins, meeting rooms, common areas — priced per sq ft or per workstation', emoji: '🏢' },
+  { name: 'Office deep cleaning', desc: 'Workstations, cabins, meeting rooms, common areas — no fixed rate; quotation after site visit', emoji: '🏢' },
   { name: 'Carpet & upholstery (office)', desc: 'Office chairs, sofas, carpets, partitions', emoji: '🛋️' },
   { name: 'Floor scrubbing & polishing', desc: 'Marble, vitrified, vinyl, wooden — machine scrub & polish', emoji: '✨' },
   { name: 'Restroom deep clean & sanitization', desc: 'Descaling, disinfection, odour control, consumable check', emoji: '🚿' },

@@ -389,6 +389,7 @@ export default function QuotationSheet({
                     {prices.map((row) => {
                       const meta = PACKAGE_PRESETS[row.id];
                       const final = (Number(row.rate) || 0) - (Number(row.disc) || 0);
+                      const siteVisit = !(Number(row.rate) > 0);
                       const selected = row.id === packageId;
                       return (
                         <tr
@@ -439,7 +440,9 @@ export default function QuotationSheet({
                               />
                             )}
                           </td>
-                          <td className="col-final final">{formatInr(final)}</td>
+                          <td className="col-final final">
+                            {siteVisit ? 'Site visit' : formatInr(final)}
+                          </td>
                         </tr>
                       );
                     })}
@@ -480,10 +483,13 @@ export default function QuotationSheet({
               <div className="paybox">
                 <div className="total">
                   <div className="k">Total Payable for {pkg.label}</div>
-                  <div className="v">{formatInr(finalAmt)}</div>
+                  <div className="v">
+                    {Number(selectedPrice?.rate) > 0 ? formatInr(finalAmt) : 'Site visit'}
+                  </div>
                   <div className="s">
-                    Rate ₹{Number(selectedPrice?.rate) || 0} − Disc ₹
-                    {Number(selectedPrice?.disc) || 0}
+                    {Number(selectedPrice?.rate) > 0
+                      ? `Rate ₹${Number(selectedPrice?.rate) || 0} − Disc ₹${Number(selectedPrice?.disc) || 0}`
+                      : 'Quote after site inspection'}
                   </div>
                 </div>
                 <div className="next">
