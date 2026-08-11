@@ -2,7 +2,7 @@
 export const SERVICE_TYPES = {
   'Full Home Deep Cleaning': ['1BHK', '2BHK', '3BHK', '4BHK', 'Other'],
   'Bungalow / Villa Deep Cleaning': ['Small', 'Medium', 'Large', 'Duplex', 'Other'],
-  'Office / Commercial Cleaning': ['Per Sq Ft', 'Per Workstation', 'Full Premises', 'Other'],
+  'Office / Commercial Cleaning': ['Per Sq Ft', 'Per Workstation', 'Office Chair Cleaning', 'Full Premises', 'Other'],
   'Sofa / Carpet / Mattress Cleaning': ['Sofa', 'Carpet', 'Mattress', 'Dining Set', 'Other'],
   'Sanitization Only': ['1BHK', '2BHK', '3BHK', 'Full Premises', 'Other'],
   Other: [],

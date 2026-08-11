@@ -23,6 +23,7 @@ import {
 } from '../utils/whatsapp';
 import {
   Building2,
+  Armchair,
   Sofa,
   Sparkles,
   Droplets,
@@ -41,6 +42,7 @@ const FREQUENCIES = ['One-time', 'Weekly', 'Monthly'];
 
 const SERVICE_ICONS = [
   Building2,
+  Armchair,
   Sofa,
   Sparkles,
   Droplets,

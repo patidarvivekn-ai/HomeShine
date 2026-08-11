@@ -67,7 +67,7 @@ export const categories = [
     reviews: 'For business',
     intro: 'Professional cleaning for offices, retail, clinics and restaurants — one-time deep cleans or recurring daily/weekly housekeeping.',
     color: 'from-orange-500 to-amber-600',
-    tabs: ['Office deep cleaning', 'Floor & carpet', 'Restroom', 'Post-construction', 'Recurring contracts'],
+    tabs: ['Office deep cleaning', 'Office chair cleaning', 'Floor & carpet', 'Restroom', 'Post-construction', 'Recurring contracts'],
   },
 ];
 
@@ -511,9 +511,9 @@ export const services = {
       ],
       about: 'Bundle your most-used rooms and save versus booking separately. Best value for a pre-festival or move-in refresh.',
       priceOptions: [
-        { label: '1 Bathroom + 1 Kitchen (classic)', price: 1569, duration: '~2.5 hrs', note: 'Save ~15%' },
-        { label: '2 Bathrooms + 1 Kitchen (classic)', price: 1879, duration: '~3.5 hrs', note: 'Save ~18%' },
-        { label: 'Intense bath + classic kitchen + microwave', price: 1759, duration: '~4 hrs', note: 'Save ~20%' },
+        { label: '1 Bathroom + 1 Kitchen (classic)', price: 1849, duration: '~2.5 hrs', note: 'Save ~15%' },
+        { label: '2 Bathrooms + 1 Kitchen (classic)', price: 2149, duration: '~3.5 hrs', note: 'Save ~18%' },
+        { label: 'Intense bath + classic kitchen + microwave', price: 2049, duration: '~4 hrs', note: 'Save ~20%' },
       ],
       included: [
         'Full bathroom deep clean (Intense level)',
@@ -855,7 +855,8 @@ export const services = {
 
 export const commercialServices = [
   { name: 'Office deep cleaning', desc: 'Workstations, cabins, meeting rooms, common areas — no fixed rate; quotation after site visit', emoji: '🏢' },
-  { name: 'Carpet & upholstery (office)', desc: 'Office chairs, sofas, carpets, partitions', emoji: '🛋️' },
+  { name: 'Office chair cleaning & shampooing', desc: 'Workstation, visitor and executive chairs — mesh, fabric or leather. Vacuum, shampoo, sanitise. Quoted per chair after count.', emoji: '🪑' },
+  { name: 'Carpet & sofa upholstery', desc: 'Office carpets, rugs, sofas, lounge seating and fabric partitions', emoji: '🛋️' },
   { name: 'Floor scrubbing & polishing', desc: 'Marble, vitrified, vinyl, wooden — machine scrub & polish', emoji: '✨' },
   { name: 'Restroom deep clean & sanitization', desc: 'Descaling, disinfection, odour control, consumable check', emoji: '🚿' },
   { name: 'Pantry / cafeteria cleaning', desc: 'Kitchenette, dining, appliance exteriors, floors', emoji: '🍽️' },
@@ -874,6 +875,7 @@ export const commercialBenefits = [
 ];
 
 export const commercialFaqs = [
+  { q: 'Do you clean office chairs?', a: 'Yes — mesh, fabric and leather workstation, visitor and executive chairs. We vacuum, shampoo and sanitise. Share an approximate chair count for a quote.' },
   { q: 'Do you clean after office hours?', a: 'Yes — we schedule around your working hours, including nights and weekends.' },
   { q: 'Do you provide GST invoices?', a: 'Yes, for all commercial bookings.' },
   { q: 'Minimum contract for recurring service?', a: 'Typically one month; flexible by scope.' },
