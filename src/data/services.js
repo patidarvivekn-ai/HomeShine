@@ -824,7 +824,7 @@ export const services = {
       about: 'Don\'t need a full clean? Choose the rooms you want and the price adds up as you go. Mention 3 or more rooms on WhatsApp for a bundle discount.',
       priceOptions: [
         { label: 'Living room', price: 1599, duration: '~60 min' },
-        { label: 'Bedroom (each)', price: 699, duration: '~50 min' },
+        { label: 'Bedroom (each)', price: 2199, duration: '~50 min' },
         { label: 'Kitchen (deep)', price: 1199, duration: '~90 min' },
         { label: 'Bathroom (each)', price: 649, duration: '~60 min' },
         { label: 'Balcony (each)', price: 399, duration: '~30 min' },
