@@ -501,7 +501,7 @@ export const services = {
       name: 'Bathroom + Kitchen Combo',
       rating: 4.80,
       reviews: '2,100',
-      startsAt: 499,
+      startsAt: 2049,
       unit: '',
       duration: '~2.5 hrs',
       cardBullets: [
@@ -511,9 +511,9 @@ export const services = {
       ],
       about: 'Bundle your most-used rooms and save versus booking separately. Best value for a pre-festival or move-in refresh.',
       priceOptions: [
-        { label: '1 Bathroom + 1 Kitchen (classic)', price: 1849, duration: '~2.5 hrs', note: 'Save ~15%' },
-        { label: '2 Bathrooms + 1 Kitchen (classic)', price: 2149, duration: '~3.5 hrs', note: 'Save ~18%' },
-        { label: 'Intense bath + classic kitchen + microwave', price: 2049, duration: '~4 hrs', note: 'Save ~20%' },
+        { label: '1 Bathroom + 1 Kitchen (classic)', price: 2049, duration: '~2.5 hrs', note: 'Save ~15%' },
+        { label: '2 Bathrooms + 1 Kitchen (classic)', price: 2549, duration: '~3.5 hrs', note: 'Save ~18%' },
+        { label: 'Intense bath + classic kitchen + microwave', price: 2249, duration: '~4 hrs', note: 'Save ~20%' },
       ],
       included: [
         'Full bathroom deep clean (Intense level)',
@@ -537,7 +537,7 @@ export const services = {
       name: 'Bathroom Deep Cleaning',
       rating: 4.80,
       reviews: '4,800',
-      startsAt: 449,
+      startsAt: 699,
       unit: '',
       duration: '~45 mins',
       cardBullets: [
@@ -547,8 +547,8 @@ export const services = {
       ],
       about: 'Descaling, disinfecting and scrubbing every surface from tile grout to toilet bowl — leaving your bathroom hygienic and sparkling.',
       priceOptions: [
-        { label: 'Classic', price: 449, duration: '~45 min', note: 'For regular maintenance' },
-        { label: 'Intense', price: 599, duration: '~75 min', note: 'Heavy build-up, limescale, grout' },
+        { label: 'Classic', price: 699, duration: '~45 min', note: 'For regular maintenance' },
+        { label: 'Intense', price: 849, duration: '~75 min', note: 'Heavy build-up, limescale, grout' },
       ],
       included: [
         'Toilet sanitising (inside + out)',
@@ -826,7 +826,7 @@ export const services = {
         { label: 'Living room', price: 1599, duration: '~60 min' },
         { label: 'Bedroom (each)', price: 2199, duration: '~50 min' },
         { label: 'Kitchen (deep)', price: 1199, duration: '~90 min' },
-        { label: 'Bathroom (each)', price: 649, duration: '~60 min' },
+        { label: 'Bathroom (each)', price: 849, duration: '~60 min' },
         { label: 'Balcony (each)', price: 399, duration: '~30 min' },
         { label: 'Staircase', price: 499, duration: '~40 min' },
         { label: 'Pooja room', price: 399, duration: '~30 min' },
