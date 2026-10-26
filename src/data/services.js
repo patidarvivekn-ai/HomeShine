@@ -80,7 +80,7 @@ export const services = {
       name: 'Fabric Sofa Cleaning',
       rating: 4.85,
       reviews: 520,
-      startsAt: 150,
+      startsAt: 199,
       unit: '/seat',
       duration: '~40 mins/seat',
       cardBullets: [
@@ -90,7 +90,7 @@ export const services = {
       ],
       about: 'Daily use traps crumbs, dust, sweat and pet hair deep in sofa fabric, causing odour and dullness. Our deep shampoo + extraction restores the look and removes germs and allergens.',
       priceOptions: [
-        { label: 'Per seat', price: 150, duration: '~40 mins/seat' },
+        { label: 'Per seat', price: 199, duration: '~40 mins/seat' },
         { label: '3-seater sofa', price: 499, duration: '~2 hrs' },
         { label: '5-seater (3+2)', price: 749, duration: '~3 hrs' },
         { label: '6-seater', price: 899, duration: '~3.5 hrs' },
@@ -139,7 +139,7 @@ export const services = {
       name: 'Leather / Rexine Sofa Cleaning',
       rating: 4.82,
       reviews: 210,
-      startsAt: 150,
+      startsAt: 199,
       unit: '/seat',
       duration: '~45 mins/seat',
       cardBullets: [
@@ -149,7 +149,7 @@ export const services = {
       ],
       about: 'Leather needs special care — too much water damages it. We use minimal moisture, leather-safe cleaner and a conditioning polish to keep it soft and crack-free.',
       priceOptions: [
-        { label: 'Per seat', price: 150, duration: '~45 mins/seat' },
+        { label: 'Per seat', price: 199, duration: '~45 mins/seat' },
         { label: '3-seater', price: 499, duration: '~2 hrs' },
         { label: '5-seater (3+2)', price: 749, duration: '~3 hrs' },
       ],
@@ -748,7 +748,7 @@ export const services = {
         'Final sweep and walkthrough',
       ],
       addons: [
-        { label: 'Sofa cleaning (per seat)', price: 149, unit: '/seat', emoji: '🛋️' },
+        { label: 'Sofa cleaning (per seat)', price: 199, unit: '/seat', emoji: '🛋️' },
         { label: 'Mattress cleaning', price: 399, unit: '', emoji: '🛏️' },
         { label: 'Chimney internal', price: 499, unit: '', emoji: '🔧' },
         { label: 'Balcony pressure-wash', price: 399, unit: '', emoji: '💧' },
@@ -797,7 +797,7 @@ export const services = {
         'Final walkthrough',
       ],
       addons: [
-        { label: 'Sofa cleaning (per seat)', price: 149, unit: '/seat', emoji: '🛋️' },
+        { label: 'Sofa cleaning (per seat)', price: 199, unit: '/seat', emoji: '🛋️' },
         { label: 'All mattresses', price: 499, unit: '/mattress', emoji: '🛏️' },
         { label: 'Carpet cleaning', price: 899, unit: '', emoji: '🧺' },
       ],
@@ -841,7 +841,7 @@ export const services = {
       notIncluded: ['Sofa/mattress shampoo (add separately)', 'Appliance interiors'],
       process: ['Select rooms at booking', 'Team arrives with appropriate equipment', 'Clean room-by-room', 'Walkthrough'],
       addons: [
-        { label: 'Sofa cleaning (per seat)', price: 499, unit: '/seat', emoji: '🛋️' },
+        { label: 'Sofa cleaning (per seat)', price: 199, unit: '/seat', emoji: '🛋️' },
         { label: 'Mattress cleaning', price: 399, unit: '', emoji: '🛏️' },
       ],
       goodToKnow: ['Booking 3 or more rooms? Mention it on WhatsApp and we will apply a bundle discount.'],
